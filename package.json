@@ -1,0 +1,14 @@
+{
+  "name": "aegis-pay",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PayU AEGIS-PAY Merchant Behaviour Monitoring Platform",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "cd backend && PYTHONPATH=. ./venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload",
+    "start": "bash start.sh",
+    "build": "npm --prefix frontend run build",
+    "test": "cd backend && PYTHONPATH=. ./venv/bin/pytest -v"
+  }
+}
