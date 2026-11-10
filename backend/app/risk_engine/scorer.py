@@ -399,15 +399,14 @@ def evaluate_merchant_risk(
         who_dimension_triggered_count += 1
         
     # Apply correlation damper to WHO dimension:
-    # If 2 or 3 correlated payer signals fire simultaneously, damp the 2nd and 3rd by 20% and 35%
-    # to prevent artificial runaway inflation from correlated features.
+    # If 2 or 3 correlated payer signals fire simultaneously, damp the secondary (2nd and 3rd) signals
+    # to prevent runaway inflation while preserving the primary fan-in signal strength.
     who_damper = 1.0
     if who_dimension_triggered_count == 2:
         who_damper = 0.85
     elif who_dimension_triggered_count >= 3:
-        who_damper = 0.72
+        who_damper = 0.75
         
-    sig5_contrib = sig5_contrib * (who_damper if who_dimension_triggered_count > 1 else 1.0)
     sig6_contrib = sig6_contrib * (who_damper if who_dimension_triggered_count > 1 else 1.0)
     sig7_contrib = sig7_contrib * (who_damper if who_dimension_triggered_count > 1 else 1.0)
     
@@ -553,6 +552,17 @@ def evaluate_merchant_risk(
     })
     raw_score += sig10_contrib
     
+    # Multi-dimensional convergence:
+    # When signals trigger across 4 or more distinct behavioural dimensions simultaneously,
+    # composite risk escalates reflecting systemic cross-vector anomaly.
+    triggered_dimensions = set(s["dimension"] for s in signal_results if s["triggered"])
+    multi_dim_synergy = 0.0
+    if len(triggered_dimensions) >= 5:
+        multi_dim_synergy = 55.0
+    elif len(triggered_dimensions) >= 4:
+        multi_dim_synergy = 30.0
+    raw_score += multi_dim_synergy
+
     # Base background score (calibrated baseline risk, e.g. 80-120 pts for normal active business)
     bg_score = 80 if has_sufficient_baseline else 100
     total_computed_score = int(round(min(1000.0, bg_score + raw_score)))
