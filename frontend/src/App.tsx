@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { Navbar } from './components/Navbar';
 import { Header } from './components/Header';
@@ -29,7 +29,19 @@ import { AdminGuide } from './pages/admin/AdminGuide';
 
 const AppContent: React.FC = () => {
   const { user, isAdmin, isLoading } = useAuth();
-  const [currentTab, setCurrentTab] = useState<string>('overview');
+  const getInitialTab = () => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get('tab');
+      if (tabParam) return tabParam;
+      const hash = window.location.hash.replace('#', '');
+      if (hash) return hash;
+    } catch {
+      // ignore
+    }
+    return 'overview';
+  };
+  const [currentTab, setCurrentTab] = useState<string>(getInitialTab);
   const [collapsed, setCollapsed] = useState<boolean>(false);
   const [dateRangeDays, setDateRangeDays] = useState<number>(30);
   const [isLegalModalOpen, setIsLegalModalOpen] = useState<boolean>(false);
@@ -37,8 +49,29 @@ const AppContent: React.FC = () => {
   // Navigation metadata parameters
   const [navMeta, setNavMeta] = useState<any>({});
 
+  useEffect(() => {
+    const onPopState = () => {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const tabParam = params.get('tab') || window.location.hash.replace('#', '') || 'overview';
+        setCurrentTab(tabParam);
+      } catch {
+        // ignore
+      }
+    };
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
+
   const handleNavigate = (tab: string, meta?: any) => {
     setCurrentTab(tab);
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set('tab', tab);
+      window.history.pushState({}, '', url.toString());
+    } catch {
+      // ignore
+    }
     if (meta) {
       setNavMeta(meta);
     }
