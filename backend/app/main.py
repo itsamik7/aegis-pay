@@ -26,6 +26,10 @@ from .routes.admin import router as admin_router
 
 # Ensure tables are created
 Base.metadata.create_all(bind=engine)
+try:
+    seed_database(force=False)
+except Exception as _seed_err:
+    print(f"Startup database seed note: {_seed_err}")
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -49,21 +53,28 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Register routes with /api prefix
-app.include_router(auth_router, prefix="/api")
-app.include_router(analytics_router, prefix="/api")
-app.include_router(merchants_router, prefix="/api")
-app.include_router(transactions_router, prefix="/api")
-app.include_router(alerts_router, prefix="/api")
-app.include_router(cases_router, prefix="/api")
-app.include_router(merchant_requests_router, prefix="/api")
-app.include_router(risk_router, prefix="/api")
-app.include_router(simulation_router, prefix="/api")
-app.include_router(audit_router, prefix="/api")
-app.include_router(reports_router, prefix="/api")
-app.include_router(notifications_router, prefix="/api")
-app.include_router(admin_router, prefix="/api")
+# Register routes with both /api prefix and root for seamless Vercel / serverless routing
+all_routers = [
+    auth_router,
+    analytics_router,
+    merchants_router,
+    transactions_router,
+    alerts_router,
+    cases_router,
+    merchant_requests_router,
+    risk_router,
+    simulation_router,
+    audit_router,
+    reports_router,
+    notifications_router,
+    admin_router,
+]
 
+for r in all_routers:
+    app.include_router(r, prefix="/api")
+    app.include_router(r, prefix="")
+
+@app.get("/health")
 @app.get("/api/health")
 def health_check():
     return {
@@ -75,6 +86,7 @@ def health_check():
         "synthetic_notice": "Independent Case Study Prototype — Synthetic Data Only"
     }
 
+@app.get("/search")
 @app.get("/api/search")
 def global_search(
     q: str = Query(..., min_length=1),

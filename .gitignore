@@ -24,3 +24,5 @@ frontend/.vite/
 .env
 uploads/
 backend/uploads/
+.vercel
+.env*

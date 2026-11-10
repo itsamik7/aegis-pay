@@ -8,7 +8,7 @@ Never uses real card numbers, bank accounts, or PII.
 import datetime
 import random
 import uuid
-from typing import Dict, Any, List, Tuple
+from typing import Dict, Any, List, Tuple, Optional
 from sqlalchemy.orm import Session
 from ..models import Merchant, Transaction, PayerToken, SettlementEvent, CalendarEvent
 
