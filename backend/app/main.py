@@ -53,6 +53,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from fastapi.responses import FileResponse
+
 # Register routes with both /api prefix and root for seamless Vercel / serverless routing
 all_routers = [
     auth_router,
@@ -73,6 +75,22 @@ all_routers = [
 for r in all_routers:
     app.include_router(r, prefix="/api")
     app.include_router(r, prefix="")
+
+@app.get("/")
+def root_endpoint():
+    for candidate in [
+        os.path.join(os.path.dirname(__file__), "..", "..", "frontend", "dist", "index.html"),
+        os.path.join(os.path.dirname(__file__), "..", "dist", "index.html"),
+        "/var/task/frontend/dist/index.html",
+    ]:
+        if os.path.exists(candidate):
+            return FileResponse(candidate)
+    return {
+        "app": "AEGIS-PAY",
+        "status": "online",
+        "api_docs": "/docs",
+        "health": "/api/health"
+    }
 
 @app.get("/health")
 @app.get("/api/health")
