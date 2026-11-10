@@ -39,30 +39,35 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <aside
-      className={`fixed top-0 left-0 z-30 h-screen bg-slate-900 text-slate-300 transition-all duration-300 flex flex-col border-r border-slate-800 ${
+      className={`fixed top-0 left-0 z-30 h-screen bg-[#002225] text-slate-300 transition-all duration-300 flex flex-col border-r border-[#003B3F] ${
         collapsed ? 'w-16' : 'w-64'
       }`}
     >
-      {/* Brand Header */}
-      <div className="h-16 flex items-center justify-between px-4 border-b border-slate-800 bg-slate-950/60">
+      {/* PayU Brand Header */}
+      <div className="h-16 flex items-center justify-between px-4 border-b border-[#003B3F] bg-[#001D20]">
         <div className="flex items-center gap-3 overflow-hidden cursor-pointer" onClick={() => setCurrentTab('overview')}>
-          <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-purple-700 to-indigo-500 flex items-center justify-center shadow-lg shadow-purple-900/40 flex-shrink-0">
-            <span className="font-black text-white text-lg tracking-wider">A</span>
+          <div className="h-9 w-9 rounded-xl bg-[#00383D] border border-[#004F56] flex items-center justify-center shadow-md flex-shrink-0">
+            <span className="font-black text-white text-base tracking-tighter">
+              P<span className="text-[#00FE89]">U</span>
+            </span>
           </div>
           {!collapsed && (
             <div className="flex flex-col">
-              <span className="font-extrabold text-white text-base tracking-tight leading-none flex items-center gap-1.5">
-                AEGIS<span className="text-purple-400 font-semibold">-PAY</span>
-              </span>
+              <div className="flex items-center gap-1.5 leading-none">
+                <span className="font-black text-white text-lg tracking-tight">Pay<span className="text-[#00FE89]">U</span></span>
+                <span className="text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-[#00383D] text-[#00FE89] border border-[#00FE89]/20">
+                  AEGIS
+                </span>
+              </div>
               <span className="text-[10px] text-slate-400 font-medium tracking-wider uppercase mt-1">
-                Merchant Intelligence
+                Risk & Laundering Hub
               </span>
             </div>
           )}
         </div>
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition"
+          className="text-slate-400 hover:text-[#00FE89] p-1.5 rounded-lg hover:bg-[#003136] transition"
           title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
           {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
@@ -81,20 +86,20 @@ export const Navbar: React.FC<NavbarProps> = ({
               title={collapsed ? item.label : undefined}
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition group relative ${
                 isActive
-                  ? 'bg-purple-600 text-white shadow-md shadow-purple-600/30'
+                  ? 'bg-[#00383D] text-[#00FE89] font-bold border-l-4 border-[#00FE89] shadow-inner'
                   : item.merchantSpecial
-                  ? 'bg-slate-800/60 hover:bg-slate-800 text-amber-300 border border-amber-500/20 mt-3'
-                  : 'hover:bg-slate-800/70 text-slate-300 hover:text-white'
+                  ? 'bg-[#002B2E] hover:bg-[#00383D] text-emerald-300 border border-emerald-500/30 mt-3'
+                  : 'hover:bg-[#002D31] text-slate-300 hover:text-white'
               }`}
             >
               <Icon
                 size={19}
                 className={`flex-shrink-0 transition ${
                   isActive
-                    ? 'text-white'
+                    ? 'text-[#00FE89]'
                     : item.merchantSpecial
-                    ? 'text-amber-400'
-                    : 'text-slate-400 group-hover:text-purple-300'
+                    ? 'text-emerald-400'
+                    : 'text-slate-400 group-hover:text-[#00FE89]'
                 }`}
               />
               {!collapsed && (
@@ -103,31 +108,37 @@ export const Navbar: React.FC<NavbarProps> = ({
               {!collapsed && item.badge && (
                 <span
                   className={`text-[11px] font-bold px-1.5 py-0.5 rounded-full ${
-                    isActive ? 'bg-purple-800 text-white' : 'bg-slate-800 text-purple-300 border border-purple-800/40'
+                    isActive ? 'bg-[#002225] text-[#00FE89] border border-[#00FE89]/40' : 'bg-[#00383D] text-[#00FE89] border border-[#004D54]'
                   }`}
                 >
                   {item.badge}
                 </span>
               )}
               {!collapsed && item.highlight && !isActive && (
-                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="h-2 w-2 rounded-full bg-[#00FE89] animate-pulse" />
               )}
             </button>
           );
         })}
       </nav>
 
-      {/* Footer Prototype Notice */}
+      {/* PayU Footer Status Widget */}
       {!collapsed ? (
-        <div className="p-3.5 border-t border-slate-800/80 bg-slate-950/40 text-[11px] text-slate-400">
-          <div className="font-semibold text-slate-300">Independent Case Study</div>
-          <div className="text-[10px] text-slate-400 mt-0.5 leading-snug">
-            Synthetic Data Only. Not official PayU software.
+        <div className="p-3.5 border-t border-[#003B3F] bg-[#001D20] text-[11px] text-slate-400">
+          <div className="flex items-center justify-between">
+            <span className="font-bold text-slate-200 flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-[#00FE89] animate-pulse"></span>
+              PayU Engine v2.4
+            </span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#00383D] text-[#00FE89] font-mono">SANDBOX</span>
+          </div>
+          <div className="text-[10px] text-slate-400 mt-1 leading-snug">
+            Synthetic Case Study Prototype.
           </div>
         </div>
       ) : (
-        <div className="p-2 border-t border-slate-800 text-center text-[10px] text-slate-400">
-          PROTOTYPE
+        <div className="p-2 border-t border-[#003B3F] text-center text-[10px] text-[#00FE89] font-bold">
+          PayU
         </div>
       )}
     </aside>

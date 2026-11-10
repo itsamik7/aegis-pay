@@ -108,14 +108,14 @@ export const RulesPolicy: React.FC = () => {
       {/* Banner */}
       <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-purple-700 text-xs font-bold uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-[#008271] text-xs font-bold uppercase tracking-wider">
             <Sliders size={16} /> Admin Governance Console
           </div>
           <h2 className="text-xl font-extrabold tracking-tight text-slate-900 mt-1">
             Rules, Weights & Tier Calibration
           </h2>
           <p className="text-xs text-slate-500 mt-1">
-            Active Version: <span className="font-mono font-bold text-purple-700">{config?.version || 'v1.0.0'}</span> &bull; Last updated by {config?.created_by}
+            Active Version: <span className="font-mono font-bold text-[#008271]">{config?.version || 'v1.0.0'}</span> &bull; Last updated by {config?.created_by}
           </p>
         </div>
 
@@ -139,7 +139,7 @@ export const RulesPolicy: React.FC = () => {
               <div key={sig.id} className="py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="max-w-md">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-[11px] font-bold text-purple-700">{sig.id}</span>
+                    <span className="font-mono text-[11px] font-bold text-[#008271]">{sig.id}</span>
                     <h4 className="font-bold text-xs text-slate-900">{sig.name}</h4>
                   </div>
                   <p className="text-[11px] text-slate-500 mt-0.5">{sig.formula_description}</p>
@@ -150,7 +150,7 @@ export const RulesPolicy: React.FC = () => {
                   <div className="w-44">
                     <div className="flex justify-between text-[11px] font-semibold text-slate-700 mb-1">
                       <span>Weight:</span>
-                      <span className="font-mono font-bold text-purple-700">{currentWeight} pts</span>
+                      <span className="font-mono font-bold text-[#008271]">{currentWeight} pts</span>
                     </div>
                     <input
                       type="range"
@@ -159,7 +159,7 @@ export const RulesPolicy: React.FC = () => {
                       step={5}
                       value={currentWeight}
                       onChange={(e) => handleWeightChange(sig.id, Number(e.target.value))}
-                      className="w-full cursor-pointer accent-purple-600"
+                      className="w-full cursor-pointer accent-[#00C48C]"
                     />
                   </div>
 
@@ -181,8 +181,8 @@ export const RulesPolicy: React.FC = () => {
         </div>
 
         {/* Save Version Form */}
-        <div className="p-5 bg-purple-50/70 border border-purple-200 rounded-2xl space-y-3 pt-4">
-          <div className="font-bold text-xs text-purple-950 uppercase tracking-wider">
+        <div className="p-5 bg-emerald-50/70 border border-emerald-200 rounded-2xl space-y-3 pt-4">
+          <div className="font-bold text-xs text-emerald-950 uppercase tracking-wider">
             Deploy Policy Revision (Audit Recorded)
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -192,7 +192,7 @@ export const RulesPolicy: React.FC = () => {
                 type="text"
                 value={newVersionName}
                 onChange={(e) => setNewVersionName(e.target.value)}
-                className="w-full px-3 py-2 bg-white border border-purple-200 rounded-xl text-xs font-mono font-bold"
+                className="w-full px-3 py-2 bg-white border border-emerald-200 rounded-xl text-xs font-mono font-bold focus:outline-none focus:border-[#00C48C]"
               />
             </div>
             <div className="sm:col-span-2">
@@ -202,7 +202,7 @@ export const RulesPolicy: React.FC = () => {
                 placeholder="Explain why weights or thresholds were modified (e.g. tuned night spike threshold)..."
                 value={changeRationale}
                 onChange={(e) => setChangeRationale(e.target.value)}
-                className="w-full px-3 py-2 bg-white border border-purple-200 rounded-xl text-xs"
+                className="w-full px-3 py-2 bg-white border border-emerald-200 rounded-xl text-xs focus:outline-none focus:border-[#00C48C]"
               />
             </div>
           </div>
@@ -211,7 +211,7 @@ export const RulesPolicy: React.FC = () => {
             <button
               onClick={handleSavePolicy}
               disabled={saving || changeRationale.trim().length < 10}
-              className="px-5 py-2.5 bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs rounded-xl shadow-sm transition flex items-center gap-2 disabled:opacity-40"
+              className="px-5 py-2.5 bg-[#00383D] hover:bg-[#004D54] text-[#00FE89] font-bold text-xs rounded-xl shadow-sm transition flex items-center gap-2 disabled:opacity-40 border border-[#005C63]"
             >
               <Save size={15} /> {saving ? 'Deploying...' : 'Deploy New Version'}
             </button>
@@ -222,14 +222,14 @@ export const RulesPolicy: React.FC = () => {
       {/* Version History Table */}
       <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
         <h3 className="font-extrabold text-sm text-slate-900 mb-3 flex items-center gap-2">
-          <History size={16} className="text-purple-600" /> Configuration Version History
+          <History size={16} className="text-[#008271]" /> Configuration Version History
         </h3>
 
         <div className="divide-y divide-slate-100">
           {versions.map((v) => (
             <div key={v.version} className="py-3 flex items-center justify-between text-xs">
               <div>
-                <span className="font-mono font-bold text-purple-700 mr-2">{v.version}</span>
+                <span className="font-mono font-bold text-[#008271] mr-2">{v.version}</span>
                 <span className="text-slate-700">{v.change_rationale}</span>
                 <div className="text-[11px] text-slate-400 mt-0.5">
                   Created by {v.created_by} &bull; {v.created_at}

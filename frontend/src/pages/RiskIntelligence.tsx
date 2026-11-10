@@ -42,14 +42,14 @@ export const RiskIntelligence: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Banner */}
-      <div className="bg-gradient-to-r from-purple-950 to-indigo-950 text-white rounded-3xl p-6 shadow-lg border border-purple-800/40">
-        <div className="flex items-center gap-2 text-purple-300 text-xs font-bold uppercase tracking-wider">
+      <div className="bg-gradient-to-r from-[#002225] via-[#00383D] to-[#001D20] text-white rounded-3xl p-6 shadow-lg border border-[#004D54]">
+        <div className="flex items-center gap-2 text-[#00FE89] text-xs font-bold uppercase tracking-wider">
           <Sparkles size={16} /> Explainable AI & Quantitative Architecture
         </div>
         <h2 className="text-xl font-extrabold tracking-tight mt-1">
           The 5 Behavioural Dimensions of Merchant Risk
         </h2>
-        <p className="text-xs text-purple-200/90 max-w-3xl mt-2 leading-relaxed">
+        <p className="text-xs text-slate-300 max-w-3xl mt-2 leading-relaxed">
           AEGIS-PAY operates on a transparent, deterministic scoring engine. Every alert is traceable to exact formulas, baseline benchmarks, and orthogonal behavioural dimensions—eliminating black-box accusations and protecting legitimate seasonal merchants.
         </p>
       </div>
@@ -65,7 +65,7 @@ export const RiskIntelligence: React.FC = () => {
               onClick={() => setActiveDimension(dim.id)}
               className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition flex items-center gap-2 flex-shrink-0 ${
                 isActive
-                  ? 'bg-purple-700 text-white shadow-md shadow-purple-700/20'
+                  ? 'bg-[#00383D] text-[#00FE89] border border-[#005C63] shadow-md'
                   : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200'
               }`}
             >
@@ -88,7 +88,7 @@ export const RiskIntelligence: React.FC = () => {
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md border border-purple-200">
+                  <span className="font-mono text-xs font-bold text-[#008271] bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
                     {sig.id}
                   </span>
                   <h3 className="font-extrabold text-base text-slate-900">{sig.name}</h3>
@@ -103,7 +103,7 @@ export const RiskIntelligence: React.FC = () => {
 
               {/* Formula & Calculation Box */}
               <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-100 font-mono text-xs text-slate-800 flex items-start gap-2">
-                <FileCode size={16} className="text-purple-600 flex-shrink-0 mt-0.5" />
+                <FileCode size={16} className="text-[#008271] flex-shrink-0 mt-0.5" />
                 <div>
                   <span className="font-bold text-slate-400 block text-[10px] uppercase tracking-wider">Formula / Algorithm</span>
                   {sig.formula_description}
@@ -112,8 +112,8 @@ export const RiskIntelligence: React.FC = () => {
 
               {/* Explanations & False Alarms Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                <div className="p-3.5 bg-purple-50/50 rounded-2xl border border-purple-100">
-                  <span className="font-bold text-purple-950 uppercase tracking-wider text-[10px] block mb-1">
+                <div className="p-3.5 bg-emerald-50/50 rounded-2xl border border-emerald-100">
+                  <span className="font-bold text-emerald-950 uppercase tracking-wider text-[10px] block mb-1">
                     Analyst-Facing Rationale
                   </span>
                   <p className="text-slate-700 leading-relaxed">{sig.analyst_explanation}</p>

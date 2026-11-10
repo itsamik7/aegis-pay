@@ -15,7 +15,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ isOpen, onClose }) => {
         {/* Header */}
         <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center">
+            <div className="h-10 w-10 rounded-xl bg-emerald-50 text-[#008271] border border-emerald-200 flex items-center justify-center">
               <ShieldAlert size={22} />
             </div>
             <div>
@@ -36,8 +36,8 @@ export const LegalModal: React.FC<LegalModalProps> = ({ isOpen, onClose }) => {
         {/* Content */}
         <div className="p-6 overflow-y-auto space-y-5 text-sm text-slate-700 leading-relaxed">
           {/* Disclaimer Banner */}
-          <div className="bg-purple-50 border border-purple-200 rounded-2xl p-4 flex gap-3 text-purple-900">
-            <Info size={20} className="text-purple-700 flex-shrink-0 mt-0.5" />
+          <div className="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-4 flex gap-3 text-emerald-950">
+            <Info size={20} className="text-[#008271] flex-shrink-0 mt-0.5" />
             <div className="text-xs leading-normal">
               <strong>Independent Evaluation Prototype:</strong> AEGIS-PAY is an architectural case-study prototype developed to demonstrate explainable, graduated merchant monitoring. It is <strong>not</strong> an official PayU production service, is not connected to live payment switches, and operates exclusively on synthetic demo data.
             </div>
@@ -46,7 +46,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ isOpen, onClose }) => {
           {/* Section 1 */}
           <div>
             <h3 className="font-bold text-slate-900 flex items-center gap-2 text-sm mb-2">
-              <Scale size={16} className="text-purple-600" />
+              <Scale size={16} className="text-[#008271]" />
               1. Non-Punitive, Human-Governed Risk Indicator (Never Proof of Crime)
             </h3>
             <p className="text-xs text-slate-600 pl-6">
@@ -68,7 +68,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ isOpen, onClose }) => {
           {/* Section 3 */}
           <div>
             <h3 className="font-bold text-slate-900 flex items-center gap-2 text-sm mb-2">
-              <Lock size={16} className="text-indigo-600" />
+              <Lock size={16} className="text-teal-700" />
               3. Data Provenance & Downstream Transfer Visibility Limits
             </h3>
             <p className="text-xs text-slate-600 pl-6">
@@ -83,7 +83,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ isOpen, onClose }) => {
               4. Privacy, Pseudonymous Identifiers & Regulatory Governance
             </h3>
             <p className="text-xs text-slate-600 pl-6">
-              All synthetic customers are identified strictly by pseudonymous tokens (e.g. <code className="bg-slate-100 px-1 py-0.5 rounded text-purple-700">payer_004812</code>). No real card PANs, CVVs, bank account numbers, or personal identifying information are stored. The prototype does not assert conclusive compliance with RBI Master Directions, PMLA rules, or the DPDP Act 2023; production adoption requires comprehensive enterprise regulatory audit.
+              All synthetic customers are identified strictly by pseudonymous tokens (e.g. <code className="bg-slate-100 px-1 py-0.5 rounded text-[#008271]">payer_004812</code>). No real card PANs, CVVs, bank account numbers, or personal identifying information are stored. The prototype does not assert conclusive compliance with RBI Master Directions, PMLA rules, or the DPDP Act 2023; production adoption requires comprehensive enterprise regulatory audit.
             </p>
           </div>
         </div>
@@ -92,7 +92,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ isOpen, onClose }) => {
         <div className="px-6 py-4 border-t border-slate-200 bg-slate-50 flex justify-end">
           <button
             onClick={onClose}
-            className="px-5 py-2 bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs rounded-xl shadow-sm transition"
+            className="px-5 py-2 bg-[#00383D] hover:bg-[#004D54] text-[#00FE89] font-bold text-xs rounded-xl shadow-sm transition border border-[#005C63]"
           >
             I Acknowledge & Understand
           </button>

@@ -48,7 +48,7 @@ export const Reports: React.FC = () => {
       {/* Header */}
       <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-purple-700 text-xs font-bold uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-[#008271] text-xs font-bold uppercase tracking-wider">
             <BarChart3 size={16} /> Operational Reporting
           </div>
           <h2 className="text-xl font-extrabold tracking-tight text-slate-900 mt-1">
@@ -89,7 +89,7 @@ export const Reports: React.FC = () => {
                 <XAxis dataKey="label" tick={{ fontSize: 10 }} />
                 <YAxis tick={{ fontSize: 10 }} />
                 <Tooltip contentStyle={{ borderRadius: '12px' }} />
-                <Bar dataKey="count" fill="#7C3AED" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="count" fill="#00A375" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -108,7 +108,7 @@ export const Reports: React.FC = () => {
                   <span className="font-bold text-slate-900">{s.name}</span>
                   <div className="text-[10px] text-slate-400">{s.dimension} &bull; {s.severity}</div>
                 </div>
-                <span className="font-mono font-bold text-sm text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg">
+                <span className="font-mono font-bold text-sm text-[#008271] bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg">
                   {s.trigger_count}
                 </span>
               </div>

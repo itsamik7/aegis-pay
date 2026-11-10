@@ -129,15 +129,15 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
   return (
     <div className="space-y-6">
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-purple-900 via-indigo-900 to-slate-900 text-white rounded-3xl p-6 shadow-lg border border-purple-800/40 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="bg-gradient-to-r from-[#002225] via-[#00383D] to-[#001D20] text-white rounded-3xl p-6 shadow-lg border border-[#004D54] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-purple-300 text-xs font-bold uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-[#00FE89] text-xs font-bold uppercase tracking-wider">
             <FlaskConical size={16} /> Synthetic Evaluation & Anomaly Injection Lab
           </div>
           <h2 className="text-xl font-extrabold tracking-tight mt-1">
             Simulation Lab & Model Evaluation Workbench
           </h2>
-          <p className="text-xs text-purple-200/90 max-w-2xl mt-1.5 leading-relaxed">
+          <p className="text-xs text-slate-300 max-w-2xl mt-1.5 leading-relaxed">
             Test how the risk engine detects laundering typologies, handles festive seasonality surges, protects legitimate merchants, and performs under Bayesian sparse-crime conditions.
           </p>
         </div>
@@ -159,7 +159,7 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
         <button
           onClick={() => setActiveTab('scenarios')}
           className={`flex-1 py-2.5 rounded-xl transition flex items-center justify-center gap-2 ${
-            activeTab === 'scenarios' ? 'bg-purple-700 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+            activeTab === 'scenarios' ? 'bg-[#00383D] text-[#00FE89] border border-[#005C63] shadow-xs' : 'text-slate-600 hover:bg-slate-100'
           }`}
         >
           <Play size={14} /> 1. Five Synthetic Scenarios
@@ -167,7 +167,7 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
         <button
           onClick={() => setActiveTab('adversarial')}
           className={`flex-1 py-2.5 rounded-xl transition flex items-center justify-center gap-2 ${
-            activeTab === 'adversarial' ? 'bg-purple-700 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+            activeTab === 'adversarial' ? 'bg-[#00383D] text-[#00FE89] border border-[#005C63] shadow-xs' : 'text-slate-600 hover:bg-slate-100'
           }`}
         >
           <Zap size={14} /> 2. Adversarial & False-Positive Tests
@@ -175,7 +175,7 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
         <button
           onClick={() => setActiveTab('evaluation')}
           className={`flex-1 py-2.5 rounded-xl transition flex items-center justify-center gap-2 ${
-            activeTab === 'evaluation' ? 'bg-purple-700 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+            activeTab === 'evaluation' ? 'bg-[#00383D] text-[#00FE89] border border-[#005C63] shadow-xs' : 'text-slate-600 hover:bg-slate-100'
           }`}
         >
           <BarChart2 size={14} /> 3. Evaluation Metrics & Ablation
@@ -183,7 +183,7 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
         <button
           onClick={() => setActiveTab('prevalence')}
           className={`flex-1 py-2.5 rounded-xl transition flex items-center justify-center gap-2 ${
-            activeTab === 'prevalence' ? 'bg-purple-700 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+            activeTab === 'prevalence' ? 'bg-[#00383D] text-[#00FE89] border border-[#005C63] shadow-xs' : 'text-slate-600 hover:bg-slate-100'
           }`}
         >
           <Calculator size={14} /> 4. Rare-Event Prevalence Calculator
@@ -206,7 +206,7 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
                     onClick={() => setSelectedScenarioKey(sc.key)}
                     className={`p-3.5 rounded-2xl border cursor-pointer transition ${
                       isSelected
-                        ? 'border-purple-600 bg-purple-50/70 shadow-xs'
+                        ? 'border-[#00C48C] bg-emerald-50/70 shadow-xs'
                         : 'border-slate-200 hover:border-slate-300 bg-slate-50/60'
                     }`}
                   >
@@ -251,7 +251,7 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
               <button
                 onClick={handleRunSimulation}
                 disabled={runningSim || isReadOnly}
-                className="w-full py-3 bg-purple-700 hover:bg-purple-800 text-white font-extrabold text-xs rounded-xl shadow-md transition flex items-center justify-center gap-2 disabled:opacity-40"
+                className="w-full py-3 bg-[#00383D] hover:bg-[#004D54] text-[#00FE89] font-extrabold text-xs rounded-xl shadow-md transition flex items-center justify-center gap-2 disabled:opacity-40 border border-[#005C63]"
               >
                 {runningSim ? (
                   <>Running Simulation...</>
@@ -292,9 +292,9 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
                     </div>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-purple-50/70 border border-purple-200 text-center">
-                    <span className="text-[10px] font-bold text-purple-700 uppercase tracking-wider">After Recalculation</span>
-                    <div className="text-3xl font-black text-purple-900 font-mono mt-1">
+                  <div className="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 text-center">
+                    <span className="text-[10px] font-bold text-[#008271] uppercase tracking-wider">After Recalculation</span>
+                    <div className="text-3xl font-black text-[#00383D] font-mono mt-1">
                       {simResult.after.score}
                     </div>
                     <div className="mt-2">
@@ -334,7 +334,7 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
                 <div className="pt-2">
                   <button
                     onClick={() => onNavigate('merchants', { selectedMerchantId: simResult.merchant_id })}
-                    className="text-xs font-bold text-purple-700 hover:text-purple-900 underline"
+                    className="text-xs font-bold text-[#008271] hover:text-[#005C51] underline"
                   >
                     View Merchant Profile Details &rarr;
                   </button>
@@ -365,7 +365,7 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
             {adversarialTests.map((t) => (
               <div key={t.id} className="p-4 rounded-2xl border border-slate-200 bg-slate-50/50 space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold text-purple-700">{t.id}</span>
+                  <span className="font-mono text-xs font-bold text-[#008271]">{t.id}</span>
                   <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                     t.synthetic_ground_truth === 'Legitimate' ? 'bg-emerald-50 text-emerald-800' : 'bg-rose-50 text-rose-800'
                   }`}>
@@ -374,7 +374,7 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
                 </div>
                 <h4 className="font-bold text-sm text-slate-900">{t.name}</h4>
                 <p className="text-xs text-slate-600 leading-snug">{t.description}</p>
-                <div className="p-2.5 bg-white rounded-xl border border-slate-200 text-xs text-purple-900 font-medium">
+                <div className="p-2.5 bg-white rounded-xl border border-slate-200 text-xs text-emerald-950 font-medium">
                   <strong>Expected Engine Response:</strong> {t.expected_outcome}
                 </div>
               </div>
@@ -402,7 +402,7 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <div className="bg-white p-5 rounded-2xl border border-slate-200 text-center shadow-xs">
                   <span className="text-xs font-bold text-slate-400 uppercase">Precision (PPV)</span>
-                  <div className="text-3xl font-black text-purple-900 font-mono mt-1">
+                  <div className="text-3xl font-black text-[#00383D] font-mono mt-1">
                     {(evalData.performance_rates.precision * 100).toFixed(1)}%
                   </div>
                 </div>
@@ -416,7 +416,7 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
 
                 <div className="bg-white p-5 rounded-2xl border border-slate-200 text-center shadow-xs">
                   <span className="text-xs font-bold text-slate-400 uppercase">F1-Score</span>
-                  <div className="text-3xl font-black text-indigo-600 font-mono mt-1">
+                  <div className="text-3xl font-black text-[#008271] font-mono mt-1">
                     {evalData.performance_rates.f1_score.toFixed(3)}
                   </div>
                 </div>
@@ -486,7 +486,7 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
                       <div className="flex gap-4 font-mono font-semibold">
                         <span>Precision: {ab.precision}</span>
                         <span>Recall: {ab.recall}</span>
-                        <span className="font-bold text-purple-700">F1: {ab.f1_score}</span>
+                        <span className="font-bold text-[#008271]">F1: {ab.f1_score}</span>
                       </div>
                     </div>
                   ))}
@@ -531,7 +531,7 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
                 step={0.0005}
                 value={prevalenceRate}
                 onChange={(e) => setPrevalenceRate(Number(e.target.value))}
-                className="w-full cursor-pointer accent-purple-600"
+                className="w-full cursor-pointer accent-[#00C48C]"
               />
             </div>
 
@@ -546,7 +546,7 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
                 step={0.01}
                 value={sensitivity}
                 onChange={(e) => setSensitivity(Number(e.target.value))}
-                className="w-full cursor-pointer accent-purple-600"
+                className="w-full cursor-pointer accent-[#00C48C]"
               />
             </div>
 
@@ -561,7 +561,7 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
                 step={0.005}
                 value={fpr}
                 onChange={(e) => setFpr(Number(e.target.value))}
-                className="w-full cursor-pointer accent-purple-600"
+                className="w-full cursor-pointer accent-[#00C48C]"
               />
             </div>
           </div>
@@ -569,12 +569,12 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
           {prevalenceResult && (
             <div className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div className="p-4 rounded-2xl bg-purple-50/70 border border-purple-200 text-center">
-                  <span className="text-[11px] font-bold text-purple-900 uppercase">Total Flagged for Review</span>
-                  <div className="text-3xl font-black text-purple-950 font-mono mt-1">
+                <div className="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 text-center">
+                  <span className="text-[11px] font-bold text-emerald-950 uppercase">Total Flagged for Review</span>
+                  <div className="text-3xl font-black text-[#00383D] font-mono mt-1">
                     {prevalenceResult.outcomes.total_flagged_for_review.toLocaleString()}
                   </div>
-                  <div className="text-[10px] text-purple-700 mt-1">
+                  <div className="text-[10px] text-[#008271] mt-1">
                     {prevalenceResult.outcomes.true_positives.toLocaleString()} True + {prevalenceResult.outcomes.false_positives.toLocaleString()} False
                   </div>
                 </div>
@@ -597,10 +597,10 @@ export const SimulationLab: React.FC<{ onNavigate: (tab: string, meta?: any) => 
               </div>
 
               {/* Takeaway Box */}
-              <div className="p-4 bg-purple-900 text-white rounded-2xl shadow-sm text-xs leading-relaxed flex items-start gap-3">
-                <ShieldCheck size={20} className="text-emerald-400 flex-shrink-0 mt-0.5" />
+              <div className="p-4 bg-[#002225] border border-[#004D54] text-white rounded-2xl shadow-sm text-xs leading-relaxed flex items-start gap-3">
+                <ShieldCheck size={20} className="text-[#00FE89] flex-shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-bold block text-sm mb-0.5">Analyst & Platform Takeaway</span>
+                  <span className="font-bold block text-sm mb-0.5 text-[#00FE89]">Analyst & Platform Takeaway</span>
                   {prevalenceResult.analyst_takeaway}
                 </div>
               </div>

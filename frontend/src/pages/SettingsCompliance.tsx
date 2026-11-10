@@ -9,7 +9,7 @@ export const SettingsCompliance: React.FC = () => {
     <div className="space-y-6">
       {/* Banner */}
       <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
-        <div className="flex items-center gap-2 text-purple-700 text-xs font-bold uppercase tracking-wider">
+        <div className="flex items-center gap-2 text-[#008271] text-xs font-bold uppercase tracking-wider">
           <Shield size={16} /> System Settings & Compliance
         </div>
         <h2 className="text-xl font-extrabold tracking-tight text-slate-900 mt-1">
@@ -25,7 +25,7 @@ export const SettingsCompliance: React.FC = () => {
         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
           <div>
             <h3 className="font-bold text-sm text-slate-900 flex items-center gap-2">
-              <Key size={16} className="text-purple-600" />
+              <Key size={16} className="text-[#008271]" />
               Pre-Configured Demo Accounts (Safe Local Credentials)
             </h3>
             <p className="text-xs text-slate-500">
@@ -42,13 +42,13 @@ export const SettingsCompliance: React.FC = () => {
             <div
               key={du.id}
               onClick={() => switchUser(du)}
-              className="p-4 rounded-2xl border border-slate-200 hover:border-purple-600 hover:bg-purple-50/30 transition cursor-pointer space-y-2 group"
+              className="p-4 rounded-2xl border border-slate-200 hover:border-[#00C48C] hover:bg-emerald-50/30 transition cursor-pointer space-y-2 group"
             >
               <div className="flex items-center justify-between">
-                <span className="font-extrabold text-sm text-slate-900 group-hover:text-purple-700">
+                <span className="font-extrabold text-sm text-slate-900 group-hover:text-[#008271]">
                   {du.full_name}
                 </span>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-[#008271]">
                   {du.role}
                 </span>
               </div>
@@ -65,7 +65,7 @@ export const SettingsCompliance: React.FC = () => {
       {/* Statutory Disclaimers */}
       <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
         <h3 className="font-bold text-sm text-slate-900 flex items-center gap-2">
-          <Scale size={16} className="text-purple-600" />
+          <Scale size={16} className="text-[#008271]" />
           Statutory Limitations & Governance Boundaries
         </h3>
 

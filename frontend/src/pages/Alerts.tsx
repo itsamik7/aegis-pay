@@ -222,7 +222,7 @@ export const Alerts: React.FC<AlertsProps> = ({ initialAlertId, onNavigate }) =>
                             setSeverityFilter('all');
                             setTierFilter('all');
                           }}
-                          className="text-xs text-purple-600 font-semibold hover:underline"
+                          className="text-xs text-[#008271] font-semibold hover:underline"
                         >
                           Clear all filters
                         </button>
@@ -235,10 +235,10 @@ export const Alerts: React.FC<AlertsProps> = ({ initialAlertId, onNavigate }) =>
                   <tr
                     key={a.id}
                     onClick={() => setSelectedAlertId(a.id)}
-                    className="hover:bg-purple-50/40 transition cursor-pointer group"
+                    className="hover:bg-emerald-50/40 transition cursor-pointer group"
                   >
                     <td className="py-3.5 px-4">
-                      <div className="font-bold text-slate-900 group-hover:text-purple-700">{a.merchant_name}</div>
+                      <div className="font-bold text-slate-900 group-hover:text-[#008271]">{a.merchant_name}</div>
                       <div className="text-[11px] text-slate-400 font-mono">{a.id} &bull; {a.merchant_id}</div>
                     </td>
                     <td className="py-3.5 px-4">
@@ -271,7 +271,7 @@ export const Alerts: React.FC<AlertsProps> = ({ initialAlertId, onNavigate }) =>
                           handleCreateCaseFromAlert(a);
                         }}
                         disabled={isReadOnly}
-                        className="px-2.5 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded-lg text-xs font-bold transition disabled:opacity-40"
+                        className="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 text-[#008271] border border-emerald-200 rounded-lg text-xs font-bold transition disabled:opacity-40"
                         title="Create formal investigation case"
                       >
                         Open Case
@@ -291,7 +291,7 @@ export const Alerts: React.FC<AlertsProps> = ({ initialAlertId, onNavigate }) =>
           <div className="w-full max-w-2xl bg-white h-full shadow-2xl border-l border-slate-200 flex flex-col overflow-hidden">
             <div className="px-6 py-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
               <div>
-                <div className="text-xs font-mono text-purple-700 font-bold">{selectedAlertId}</div>
+                <div className="text-xs font-mono text-[#008271] font-bold">{selectedAlertId}</div>
                 <h2 className="text-base font-extrabold text-slate-900">
                   {alertDetail?.alert.merchant_name || 'Alert Details'}
                 </h2>
@@ -328,11 +328,11 @@ export const Alerts: React.FC<AlertsProps> = ({ initialAlertId, onNavigate }) =>
                   </div>
 
                   {/* Recommended Next Step */}
-                  <div className="bg-purple-50/70 border border-purple-200 rounded-2xl p-4">
-                    <span className="text-xs font-bold text-purple-900 uppercase tracking-wider block">Recommended Next Step</span>
-                    <p className="text-sm font-semibold text-purple-950 mt-1">{alertDetail.alert.recommended_next_step}</p>
+                  <div className="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-4">
+                    <span className="text-xs font-bold text-emerald-950 uppercase tracking-wider block">Recommended Next Step</span>
+                    <p className="text-sm font-semibold text-[#00383D] mt-1">{alertDetail.alert.recommended_next_step}</p>
                     {alertDetail.alert.cleared_reason && (
-                      <div className="mt-2 pt-2 border-t border-purple-200/60 text-xs text-slate-700">
+                      <div className="mt-2 pt-2 border-t border-emerald-200/60 text-xs text-slate-700">
                         <span className="font-bold">Cleared Rationale:</span> {alertDetail.alert.cleared_reason}
                       </div>
                     )}
@@ -374,7 +374,7 @@ export const Alerts: React.FC<AlertsProps> = ({ initialAlertId, onNavigate }) =>
                       <button
                         onClick={() => { setActionType('status'); setTargetStatus('Under Review'); setActionRationale('Marking under active investigation'); }}
                         disabled={isReadOnly}
-                        className="px-3 py-2 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded-xl text-xs font-bold transition disabled:opacity-40"
+                        className="px-3 py-2 bg-emerald-50 hover:bg-emerald-100 text-[#008271] border border-emerald-200 rounded-xl text-xs font-bold transition disabled:opacity-40"
                       >
                         Mark Under Review
                       </button>
@@ -429,7 +429,7 @@ export const Alerts: React.FC<AlertsProps> = ({ initialAlertId, onNavigate }) =>
                             placeholder={actionType === 'clear' ? 'State why this pattern is benign (e.g. verified festive holiday invoice)...' : 'Reason for this triage action...'}
                             value={actionRationale}
                             onChange={(e) => setActionRationale(e.target.value)}
-                            className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-purple-600"
+                            className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#00C48C]"
                           />
                         </div>
 
@@ -443,7 +443,7 @@ export const Alerts: React.FC<AlertsProps> = ({ initialAlertId, onNavigate }) =>
                           <button
                             onClick={handleExecuteAction}
                             disabled={actionSubmitting || (actionType === 'clear' && actionRationale.trim().length < 5)}
-                            className="px-4 py-1.5 bg-purple-700 hover:bg-purple-800 text-white text-xs font-bold rounded-xl shadow-xs disabled:opacity-40 transition"
+                            className="px-4 py-1.5 bg-[#00383D] hover:bg-[#004D54] text-[#00FE89] text-xs font-bold rounded-xl shadow-xs disabled:opacity-40 transition border border-[#005C63]"
                           >
                             {actionSubmitting ? 'Submitting...' : 'Confirm Action'}
                           </button>

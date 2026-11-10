@@ -174,7 +174,7 @@ export const Cases: React.FC<CasesProps> = ({ initialCaseId, onNavigate }) => {
       <div className="lg:col-span-4 bg-white rounded-3xl border border-slate-200 shadow-sm flex flex-col overflow-hidden">
         <div className="p-4 border-b border-slate-100 flex items-center justify-between">
           <h2 className="font-extrabold text-sm text-slate-900 flex items-center gap-2">
-            <FolderKanban size={17} className="text-purple-600" />
+            <FolderKanban size={17} className="text-[#008271]" />
             Cases Queue ({cases.length})
           </h2>
           <span className="text-[11px] font-semibold text-slate-500">Human Governed</span>
@@ -192,16 +192,16 @@ export const Cases: React.FC<CasesProps> = ({ initialCaseId, onNavigate }) => {
                   onClick={() => setSelectedCaseId(c.id)}
                   className={`p-3.5 rounded-2xl cursor-pointer transition ${
                     isSelected
-                      ? 'bg-purple-600 text-white shadow-md shadow-purple-600/20'
+                      ? 'bg-[#00383D] text-white shadow-md border-l-4 border-[#00FE89]'
                       : 'hover:bg-slate-50 text-slate-800'
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className={`text-[10px] font-mono font-bold ${isSelected ? 'text-purple-200' : 'text-slate-400'}`}>
+                    <span className={`text-[10px] font-mono font-bold ${isSelected ? 'text-[#00FE89]' : 'text-slate-400'}`}>
                       {c.id}
                     </span>
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                      isSelected ? 'bg-purple-800 text-white' : 'bg-slate-100 text-slate-700'
+                      isSelected ? 'bg-[#002225] text-[#00FE89] border border-[#00FE89]/30' : 'bg-slate-100 text-slate-700'
                     }`}>
                       {c.priority}
                     </span>
@@ -212,11 +212,11 @@ export const Cases: React.FC<CasesProps> = ({ initialCaseId, onNavigate }) => {
                   </h3>
 
                   <div className="mt-2 flex items-center justify-between text-[11px]">
-                    <span className={isSelected ? 'text-purple-100 font-medium' : 'text-slate-500'}>
+                    <span className={isSelected ? 'text-emerald-200 font-medium' : 'text-slate-500'}>
                       {c.merchant_name}
                     </span>
                     <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
-                      isSelected ? 'bg-purple-700 text-white' : 'bg-slate-100 text-slate-700'
+                      isSelected ? 'bg-[#002B2E] text-emerald-200' : 'bg-slate-100 text-slate-700'
                     }`}>
                       {c.status}
                     </span>
@@ -238,7 +238,7 @@ export const Cases: React.FC<CasesProps> = ({ initialCaseId, onNavigate }) => {
             <div className="p-6 border-b border-slate-100 bg-slate-50/70 flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs font-bold text-purple-700">{caseDetail.case.id}</span>
+                  <span className="font-mono text-xs font-bold text-[#008271]">{caseDetail.case.id}</span>
                   <StatusBadge status={caseDetail.case.status} />
                   <SeverityBadge severity={caseDetail.case.priority} />
                 </div>
@@ -254,7 +254,7 @@ export const Cases: React.FC<CasesProps> = ({ initialCaseId, onNavigate }) => {
                 <button
                   onClick={() => setShowInquiryModal(true)}
                   disabled={isReadOnly}
-                  className="px-3 py-2 bg-purple-700 hover:bg-purple-800 text-white text-xs font-bold rounded-xl shadow-xs transition flex items-center gap-1.5 disabled:opacity-40"
+                  className="px-3 py-2 bg-[#00383D] hover:bg-[#004D54] text-[#00FE89] text-xs font-bold rounded-xl shadow-xs transition flex items-center gap-1.5 disabled:opacity-40 border border-[#005C63]"
                 >
                   <Send size={13} /> Request Merchant Clarification
                 </button>
@@ -267,7 +267,7 @@ export const Cases: React.FC<CasesProps> = ({ initialCaseId, onNavigate }) => {
               <div>
                 <div className="flex items-center justify-between pb-2 border-b border-slate-200 mb-3">
                   <h3 className="font-bold text-slate-900 text-sm flex items-center gap-2">
-                    <FileCheck size={16} className="text-emerald-600" />
+                    <FileCheck size={16} className="text-[#008271]" />
                     Assembled Evidence Timeline ({caseDetail.evidence?.length || 0})
                   </h3>
                   <span className="text-[11px] text-slate-400">Strict Data Provenance</span>
@@ -292,21 +292,21 @@ export const Cases: React.FC<CasesProps> = ({ initialCaseId, onNavigate }) => {
               </div>
 
               {/* Current Recommendation & Senior Review Approval Workflow */}
-              <div className="p-5 rounded-3xl bg-purple-50/70 border border-purple-200 space-y-4">
+              <div className="p-5 rounded-3xl bg-emerald-50/70 border border-emerald-200 space-y-4">
                 <div className="flex items-center justify-between">
-                  <div className="font-bold text-sm text-purple-950 flex items-center gap-2">
-                    <ShieldAlert size={17} className="text-purple-700" />
+                  <div className="font-bold text-sm text-emerald-950 flex items-center gap-2">
+                    <ShieldAlert size={17} className="text-[#008271]" />
                     Graduated Policy Recommendation & Governance
                   </div>
-                  <span className="text-[10px] uppercase tracking-wider font-extrabold text-purple-700 bg-purple-100 px-2.5 py-0.5 rounded-full">
+                  <span className="text-[10px] uppercase tracking-wider font-extrabold text-[#008271] bg-emerald-100 px-2.5 py-0.5 rounded-full border border-emerald-200">
                     Human Approval Required
                   </span>
                 </div>
 
                 {caseDetail.case.current_recommendation ? (
-                  <div className="p-4 bg-white rounded-2xl border border-purple-100 space-y-2">
+                  <div className="p-4 bg-white rounded-2xl border border-emerald-100 space-y-2">
                     <div className="text-xs font-bold text-slate-900">Analyst Recommendation:</div>
-                    <p className="text-xs text-purple-900 font-medium">"{caseDetail.case.current_recommendation}"</p>
+                    <p className="text-xs text-emerald-950 font-medium">"{caseDetail.case.current_recommendation}"</p>
                     <div className="text-[11px] text-slate-500 font-medium">
                       Rationale: {caseDetail.case.recommendation_rationale}
                     </div>
@@ -322,13 +322,13 @@ export const Cases: React.FC<CasesProps> = ({ initialCaseId, onNavigate }) => {
                       </div>
                     ) : isReviewer ? (
                       /* Senior Reviewer Approval Controls */
-                      <div className="mt-4 pt-3 border-t border-purple-100 space-y-3">
+                      <div className="mt-4 pt-3 border-t border-emerald-100 space-y-3">
                         <span className="text-xs font-bold text-slate-900 block">Senior Reviewer Action:</span>
                         <div className="flex gap-2">
                           <button
                             onClick={() => setReviewerDecision('Approved')}
                             className={`px-3 py-1.5 rounded-xl text-xs font-bold transition ${
-                              reviewerDecision === 'Approved' ? 'bg-emerald-600 text-white' : 'bg-white border text-slate-700'
+                              reviewerDecision === 'Approved' ? 'bg-[#00383D] text-[#00FE89] border border-[#005C63]' : 'bg-white border text-slate-700'
                             }`}
                           >
                             Approve Simulated Recommendation
@@ -355,12 +355,12 @@ export const Cases: React.FC<CasesProps> = ({ initialCaseId, onNavigate }) => {
                           placeholder="Record senior review rationale (Mandatory)..."
                           value={reviewerRationale}
                           onChange={(e) => setReviewerRationale(e.target.value)}
-                          className="w-full px-3 py-2 bg-white rounded-xl border border-purple-200 text-xs focus:outline-none"
+                          className="w-full px-3 py-2 bg-white rounded-xl border border-emerald-200 text-xs focus:outline-none focus:border-[#00C48C]"
                         />
                         <button
                           onClick={handleReviewerDecision}
                           disabled={!reviewerRationale.trim()}
-                          className="px-4 py-1.5 bg-purple-700 hover:bg-purple-800 text-white font-bold rounded-xl text-xs disabled:opacity-40 transition"
+                          className="px-4 py-1.5 bg-[#00383D] hover:bg-[#004D54] text-[#00FE89] font-bold rounded-xl text-xs disabled:opacity-40 transition border border-[#005C63]"
                         >
                           Submit Final Decision
                         </button>
@@ -380,7 +380,7 @@ export const Cases: React.FC<CasesProps> = ({ initialCaseId, onNavigate }) => {
                       value={recommendationText}
                       onChange={(e) => setRecommendationText(e.target.value)}
                       disabled={isReadOnly}
-                      className="w-full px-3 py-2 bg-white border border-purple-200 rounded-xl text-xs focus:outline-none"
+                      className="w-full px-3 py-2 bg-white border border-emerald-200 rounded-xl text-xs focus:outline-none focus:border-[#00C48C]"
                     />
                     <input
                       type="text"
@@ -388,12 +388,12 @@ export const Cases: React.FC<CasesProps> = ({ initialCaseId, onNavigate }) => {
                       value={recommendationRationale}
                       onChange={(e) => setRecommendationRationale(e.target.value)}
                       disabled={isReadOnly}
-                      className="w-full px-3 py-2 bg-white border border-purple-200 rounded-xl text-xs focus:outline-none"
+                      className="w-full px-3 py-2 bg-white border border-emerald-200 rounded-xl text-xs focus:outline-none focus:border-[#00C48C]"
                     />
                     <button
                       onClick={handleRecommendAction}
                       disabled={!recommendationText.trim() || isReadOnly}
-                      className="px-4 py-2 bg-purple-700 hover:bg-purple-800 text-white font-bold rounded-xl text-xs transition disabled:opacity-40"
+                      className="px-4 py-2 bg-[#00383D] hover:bg-[#004D54] text-[#00FE89] font-bold rounded-xl text-xs transition disabled:opacity-40 border border-[#005C63]"
                     >
                       Propose Recommendation for Senior Review
                     </button>
@@ -404,7 +404,7 @@ export const Cases: React.FC<CasesProps> = ({ initialCaseId, onNavigate }) => {
               {/* Case Notes & Audit Chronology */}
               <div>
                 <h3 className="font-bold text-slate-900 text-sm mb-3 flex items-center gap-2">
-                  <MessageSquare size={16} className="text-purple-600" />
+                  <MessageSquare size={16} className="text-[#008271]" />
                   Analyst Investigation Notes ({caseDetail.notes?.length || 0})
                 </h3>
 
@@ -428,7 +428,7 @@ export const Cases: React.FC<CasesProps> = ({ initialCaseId, onNavigate }) => {
                     value={noteContent}
                     onChange={(e) => setNoteContent(e.target.value)}
                     disabled={isReadOnly}
-                    className="w-full p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs focus:outline-none focus:bg-white focus:border-purple-600"
+                    className="w-full p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs focus:outline-none focus:bg-white focus:border-[#00C48C]"
                   />
                   <div className="flex justify-end">
                     <button
@@ -533,7 +533,7 @@ export const Cases: React.FC<CasesProps> = ({ initialCaseId, onNavigate }) => {
               <button
                 onClick={handleCreateInquiry}
                 disabled={!inquiryMessage.trim()}
-                className="px-5 py-2 bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs rounded-xl transition disabled:opacity-40"
+                className="px-5 py-2 bg-[#00383D] hover:bg-[#004D54] text-[#00FE89] font-bold text-xs rounded-xl transition disabled:opacity-40 border border-[#005C63]"
               >
                 Dispatch to Merchant Portal
               </button>

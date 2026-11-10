@@ -7,11 +7,11 @@ body {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #F8FAFC;
-  color: #0F172A;
+  background-color: #F5F7F8;
+  color: #111827;
 }
 
-/* Custom scrollbars */
+/* Custom scrollbars with PayU accents */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -24,5 +24,5 @@ body {
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #00A375;
 }

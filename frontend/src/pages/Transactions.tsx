@@ -95,7 +95,7 @@ export const Transactions: React.FC<TransactionsProps> = ({ initialSearch, onNav
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={(e) => { if (e.key === 'Enter') { setPage(1); fetchTransactions(); } }}
-              className="w-full pl-9 pr-4 py-2 bg-slate-50 text-sm text-slate-900 rounded-xl border border-slate-200 focus:outline-none focus:border-purple-600 focus:bg-white transition"
+              className="w-full pl-9 pr-4 py-2 bg-slate-50 text-sm text-slate-900 rounded-xl border border-slate-200 focus:outline-none focus:border-[#00C48C] focus:bg-white transition"
             />
           </div>
 
@@ -172,9 +172,9 @@ export const Transactions: React.FC<TransactionsProps> = ({ initialSearch, onNav
                   <tr
                     key={t.id}
                     onClick={() => setSelectedTxId(t.id)}
-                    className="hover:bg-purple-50/40 transition cursor-pointer group"
+                    className="hover:bg-emerald-50/40 transition cursor-pointer group"
                   >
-                    <td className="py-3 px-4 font-mono font-bold text-slate-900 group-hover:text-purple-700">
+                    <td className="py-3 px-4 font-mono font-bold text-slate-900 group-hover:text-[#008271]">
                       {t.id}
                     </td>
                     <td className="py-3 px-4 text-slate-500">
@@ -192,7 +192,7 @@ export const Transactions: React.FC<TransactionsProps> = ({ initialSearch, onNav
                       </span>
                       <span className="text-slate-400 text-[11px]">{t.channel}</span>
                     </td>
-                    <td className="py-3 px-4 font-mono text-purple-700 font-medium text-[11px]">
+                    <td className="py-3 px-4 font-mono text-[#008271] font-medium text-[11px]">
                       {t.payer_token}
                     </td>
                     <td className="py-3 px-4">
@@ -205,7 +205,7 @@ export const Transactions: React.FC<TransactionsProps> = ({ initialSearch, onNav
                       )}
                     </td>
                     <td className="py-3 px-4 text-right">
-                      <button className="text-purple-600 hover:text-purple-800 p-1 rounded-lg">
+                      <button className="text-[#008271] hover:text-[#005C51] p-1 rounded-lg">
                         <ChevronRight size={17} />
                       </button>
                     </td>
@@ -248,7 +248,7 @@ export const Transactions: React.FC<TransactionsProps> = ({ initialSearch, onNav
           <div className="w-full max-w-lg bg-white h-full shadow-2xl border-l border-slate-200 flex flex-col overflow-hidden">
             <div className="px-6 py-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
               <div>
-                <span className="text-xs font-mono font-bold text-purple-700">{selectedTxId}</span>
+                <span className="text-xs font-mono font-bold text-[#008271]">{selectedTxId}</span>
                 <h3 className="font-extrabold text-sm text-slate-900">Transaction Signal Attribution</h3>
               </div>
               <button onClick={() => setSelectedTxId(null)} className="p-2 text-slate-400 hover:text-slate-700">
@@ -278,11 +278,11 @@ export const Transactions: React.FC<TransactionsProps> = ({ initialSearch, onNav
                   </div>
 
                   {/* Why Flagged Explanation */}
-                  <div className="p-4 bg-purple-50/70 border border-purple-200 rounded-2xl space-y-2">
-                    <span className="font-bold text-xs text-purple-950 uppercase tracking-wider block">
+                  <div className="p-4 bg-emerald-50/70 border border-emerald-200 rounded-2xl space-y-2">
+                    <span className="font-bold text-xs text-emerald-950 uppercase tracking-wider block">
                       Behavioural Signal Attribution
                     </span>
-                    <p className="text-xs text-purple-900 leading-relaxed font-medium">
+                    <p className="text-xs text-emerald-950 leading-relaxed font-medium">
                       {txDetail.signal_attribution.explanation}
                     </p>
                   </div>
@@ -301,7 +301,7 @@ export const Transactions: React.FC<TransactionsProps> = ({ initialSearch, onNav
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-400">Payer Token (Synthetic):</span>
-                        <span className="font-mono text-purple-700 font-bold">{txDetail.transaction.payer_token}</span>
+                        <span className="font-mono text-[#008271] font-bold">{txDetail.transaction.payer_token}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-400">Settlement Ref:</span>
@@ -317,7 +317,7 @@ export const Transactions: React.FC<TransactionsProps> = ({ initialSearch, onNav
                         setSelectedTxId(null);
                         onNavigate('merchants', { selectedMerchantId: txDetail.transaction.merchant_id });
                       }}
-                      className="flex-1 py-2 bg-purple-700 hover:bg-purple-800 text-white font-bold rounded-xl text-xs transition"
+                      className="flex-1 py-2 bg-[#00383D] hover:bg-[#004D54] text-[#00FE89] font-bold rounded-xl text-xs transition border border-[#005C63]"
                     >
                       Open Merchant Profile &rarr;
                     </button>

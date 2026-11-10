@@ -102,7 +102,7 @@ export const Merchants: React.FC<MerchantsProps> = ({ initialMerchantId, onNavig
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={(e) => { if (e.key === 'Enter') { setPage(1); fetchMerchants(); } }}
-              className="w-full pl-9 pr-4 py-2 bg-slate-50 text-sm text-slate-900 rounded-xl border border-slate-200 focus:outline-none focus:border-purple-600 focus:bg-white transition"
+              className="w-full pl-9 pr-4 py-2 bg-slate-50 text-sm text-slate-900 rounded-xl border border-slate-200 focus:outline-none focus:border-[#00C48C] focus:bg-white transition"
             />
           </div>
 
@@ -191,10 +191,10 @@ export const Merchants: React.FC<MerchantsProps> = ({ initialMerchantId, onNavig
                   <tr
                     key={m.id}
                     onClick={() => setSelectedMerchantId(m.id)}
-                    className="hover:bg-purple-50/40 transition cursor-pointer group"
+                    className="hover:bg-emerald-50/40 transition cursor-pointer group"
                   >
                     <td className="py-3.5 px-4">
-                      <div className="font-bold text-slate-900 group-hover:text-purple-700">{m.name}</div>
+                      <div className="font-bold text-slate-900 group-hover:text-[#008271]">{m.name}</div>
                       <div className="text-[11px] text-slate-400 font-mono">{m.id}</div>
                     </td>
                     <td className="py-3.5 px-4">
@@ -236,7 +236,7 @@ export const Merchants: React.FC<MerchantsProps> = ({ initialMerchantId, onNavig
                       {m.assigned_analyst_name || 'Unassigned'}
                     </td>
                     <td className="py-3.5 px-4 text-right">
-                      <button className="text-purple-600 hover:text-purple-800 font-bold p-1 rounded-lg hover:bg-purple-100 transition">
+                      <button className="text-[#008271] hover:text-[#005C51] font-bold p-1 rounded-lg hover:bg-emerald-100 transition">
                         <ChevronRight size={18} />
                       </button>
                     </td>
@@ -280,7 +280,7 @@ export const Merchants: React.FC<MerchantsProps> = ({ initialMerchantId, onNavig
             {/* Drawer Header */}
             <div className="px-6 py-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold">
+                <div className="h-10 w-10 rounded-2xl bg-emerald-100 text-[#008271] flex items-center justify-center font-bold">
                   <Store size={22} />
                 </div>
                 <div>
@@ -313,7 +313,7 @@ export const Merchants: React.FC<MerchantsProps> = ({ initialMerchantId, onNavig
               <button
                 onClick={() => setProfileTab('overview')}
                 className={`py-3 px-3 border-b-2 transition ${
-                  profileTab === 'overview' ? 'border-purple-600 text-purple-700 font-bold' : 'border-transparent text-slate-500 hover:text-slate-800'
+                  profileTab === 'overview' ? 'border-[#00C48C] text-[#008271] font-bold' : 'border-transparent text-slate-500 hover:text-slate-800'
                 }`}
               >
                 1. Declared Profile & Overview
@@ -321,7 +321,7 @@ export const Merchants: React.FC<MerchantsProps> = ({ initialMerchantId, onNavig
               <button
                 onClick={() => setProfileTab('signals')}
                 className={`py-3 px-3 border-b-2 transition ${
-                  profileTab === 'signals' ? 'border-purple-600 text-purple-700 font-bold' : 'border-transparent text-slate-500 hover:text-slate-800'
+                  profileTab === 'signals' ? 'border-[#00C48C] text-[#008271] font-bold' : 'border-transparent text-slate-500 hover:text-slate-800'
                 }`}
               >
                 2. Explainable Risk Signals ({merchantDetail?.live_risk_evaluation.triggered_count || 0})
@@ -329,7 +329,7 @@ export const Merchants: React.FC<MerchantsProps> = ({ initialMerchantId, onNavig
               <button
                 onClick={() => setProfileTab('behaviour')}
                 className={`py-3 px-3 border-b-2 transition ${
-                  profileTab === 'behaviour' ? 'border-purple-600 text-purple-700 font-bold' : 'border-transparent text-slate-500 hover:text-slate-800'
+                  profileTab === 'behaviour' ? 'border-[#00C48C] text-[#008271] font-bold' : 'border-transparent text-slate-500 hover:text-slate-800'
                 }`}
               >
                 3. Timing, Tickets & Payers
@@ -337,7 +337,7 @@ export const Merchants: React.FC<MerchantsProps> = ({ initialMerchantId, onNavig
               <button
                 onClick={() => setProfileTab('settlement')}
                 className={`py-3 px-3 border-b-2 transition ${
-                  profileTab === 'settlement' ? 'border-purple-600 text-purple-700 font-bold' : 'border-transparent text-slate-500 hover:text-slate-800'
+                  profileTab === 'settlement' ? 'border-[#00C48C] text-[#008271] font-bold' : 'border-transparent text-slate-500 hover:text-slate-800'
                 }`}
               >
                 4. Provider-Visible Settlements
@@ -345,7 +345,7 @@ export const Merchants: React.FC<MerchantsProps> = ({ initialMerchantId, onNavig
               <button
                 onClick={() => setProfileTab('cases')}
                 className={`py-3 px-3 border-b-2 transition ${
-                  profileTab === 'cases' ? 'border-purple-600 text-purple-700 font-bold' : 'border-transparent text-slate-500 hover:text-slate-800'
+                  profileTab === 'cases' ? 'border-[#00C48C] text-[#008271] font-bold' : 'border-transparent text-slate-500 hover:text-slate-800'
                 }`}
               >
                 5. Alerts & Inquiries ({merchantDetail?.requests.length || 0})
@@ -353,7 +353,7 @@ export const Merchants: React.FC<MerchantsProps> = ({ initialMerchantId, onNavig
               <button
                 onClick={() => setProfileTab('audit')}
                 className={`py-3 px-3 border-b-2 transition ${
-                  profileTab === 'audit' ? 'border-purple-600 text-purple-700 font-bold' : 'border-transparent text-slate-500 hover:text-slate-800'
+                  profileTab === 'audit' ? 'border-[#00C48C] text-[#008271] font-bold' : 'border-transparent text-slate-500 hover:text-slate-800'
                 }`}
               >
                 6. Audit History
@@ -449,7 +449,7 @@ export const Merchants: React.FC<MerchantsProps> = ({ initialMerchantId, onNavig
                           </div>
                           <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
                             <span className="text-slate-400 block font-medium">Seasonal Calendar Context</span>
-                            <span className="text-xs font-bold text-purple-700">{merchantDetail.calendar_context.context_note}</span>
+                            <span className="text-xs font-bold text-[#008271]">{merchantDetail.calendar_context.context_note}</span>
                           </div>
                         </div>
                       </div>
@@ -648,8 +648,8 @@ export const Merchants: React.FC<MerchantsProps> = ({ initialMerchantId, onNavig
                               </p>
 
                               {r.responses.length > 0 && (
-                                <div className="mt-3 p-3 bg-purple-50/50 border border-purple-100 rounded-xl space-y-2">
-                                  <div className="flex items-center justify-between text-xs font-bold text-purple-900">
+                                <div className="mt-3 p-3 bg-emerald-50/50 border border-emerald-100 rounded-xl space-y-2">
+                                  <div className="flex items-center justify-between text-xs font-bold text-emerald-950">
                                     <span>Merchant Written Explanation:</span>
                                     <ProvenanceBadge provenance="Merchant-declared" />
                                   </div>
@@ -657,9 +657,9 @@ export const Merchants: React.FC<MerchantsProps> = ({ initialMerchantId, onNavig
                                     "{r.responses[0].response_text}"
                                   </p>
                                   {r.responses[0].attachments?.length > 0 && (
-                                    <div className="flex gap-2 text-[11px] text-purple-700 font-semibold pt-1">
+                                    <div className="flex gap-2 text-[11px] text-[#008271] font-semibold pt-1">
                                       {r.responses[0].attachments.map((att: string, idx: number) => (
-                                        <span key={idx} className="flex items-center gap-1 bg-white px-2 py-0.5 rounded border border-purple-200">
+                                        <span key={idx} className="flex items-center gap-1 bg-white px-2 py-0.5 rounded border border-emerald-200">
                                           <FileText size={12} /> {att}
                                         </span>
                                       ))}

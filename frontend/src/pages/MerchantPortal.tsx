@@ -89,12 +89,12 @@ export const MerchantPortal: React.FC = () => {
                   onClick={() => setSelectedRequestId(r.id)}
                   className={`p-4 rounded-2xl border cursor-pointer transition space-y-2 ${
                     isSelected
-                      ? 'border-purple-600 bg-purple-50/50 shadow-xs'
+                      ? 'border-[#00C48C] bg-emerald-50/50 shadow-xs'
                       : 'border-slate-200 hover:border-slate-300 bg-slate-50/60'
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-purple-700">{r.id}</span>
+                    <span className="font-mono text-xs font-bold text-[#008271]">{r.id}</span>
                     <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                       r.status === 'Responded' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-800 border border-amber-200'
                     }`}>
@@ -121,7 +121,7 @@ export const MerchantPortal: React.FC = () => {
                 <>
                   <div className="pb-3 border-b border-slate-100">
                     <div className="flex items-center justify-between">
-                      <span className="font-mono text-xs font-bold text-purple-700">{req.id}</span>
+                      <span className="font-mono text-xs font-bold text-[#008271]">{req.id}</span>
                       <span className="text-xs text-slate-400 font-medium">Dispatched by: {req.created_by_name}</span>
                     </div>
                     <h3 className="font-extrabold text-sm text-slate-900 mt-1">{req.subject}</h3>
@@ -136,8 +136,8 @@ export const MerchantPortal: React.FC = () => {
 
                   {/* Previous responses if any */}
                   {req.responses?.length > 0 && (
-                    <div className="p-4 bg-purple-50/60 border border-purple-200 rounded-2xl space-y-2">
-                      <div className="flex items-center justify-between text-xs font-bold text-purple-900">
+                    <div className="p-4 bg-emerald-50/60 border border-emerald-200 rounded-2xl space-y-2">
+                      <div className="flex items-center justify-between text-xs font-bold text-emerald-950">
                         <span className="flex items-center gap-1.5">
                           <CheckCircle2 size={15} className="text-emerald-600" /> Submitted Response:
                         </span>
@@ -147,9 +147,9 @@ export const MerchantPortal: React.FC = () => {
                         "{req.responses[0].response_text}"
                       </p>
                       {req.responses[0].attachments?.length > 0 && (
-                        <div className="flex gap-2 text-[11px] text-purple-700 font-semibold pt-1">
+                        <div className="flex gap-2 text-[11px] text-[#008271] font-semibold pt-1">
                           {req.responses[0].attachments.map((att: string, idx: number) => (
-                            <span key={idx} className="flex items-center gap-1 bg-white px-2 py-0.5 rounded border border-purple-200">
+                            <span key={idx} className="flex items-center gap-1 bg-white px-2 py-0.5 rounded border border-emerald-200">
                               <FileText size={12} /> {att}
                             </span>
                           ))}
@@ -168,7 +168,7 @@ export const MerchantPortal: React.FC = () => {
                       placeholder="Explain the business context of these transactions (e.g., bulk catering orders, event festival pop-up)..."
                       value={responseText}
                       onChange={(e) => setResponseText(e.target.value)}
-                      className="w-full p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs focus:outline-none focus:bg-white focus:border-purple-600"
+                      className="w-full p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs focus:outline-none focus:bg-white focus:border-[#00C48C]"
                     />
 
                     <div className="flex items-center gap-2">
@@ -182,7 +182,7 @@ export const MerchantPortal: React.FC = () => {
                       <button
                         onClick={() => handleSubmitResponse(req.id)}
                         disabled={submitting || !responseText.trim()}
-                        className="px-5 py-2 bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs rounded-xl shadow-xs transition flex items-center gap-1.5 disabled:opacity-40"
+                        className="px-5 py-2 bg-[#00383D] hover:bg-[#004D54] text-[#00FE89] font-bold text-xs rounded-xl shadow-xs transition flex items-center gap-1.5 disabled:opacity-40 border border-[#005C63]"
                       >
                         <Send size={13} /> {submitting ? 'Submitting...' : 'Send Clarification'}
                       </button>

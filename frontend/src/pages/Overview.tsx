@@ -57,22 +57,22 @@ export const Overview: React.FC<OverviewProps> = ({ dateRangeDays, onNavigate })
   return (
     <div className="space-y-6">
       {/* Simulation Banner Notice */}
-      <div className="bg-gradient-to-r from-purple-900 to-indigo-900 text-white rounded-3xl p-5 shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border border-purple-800/40">
+      <div className="bg-gradient-to-r from-[#002225] via-[#00383D] to-[#001D20] text-white rounded-3xl p-5 shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border border-[#004D54]">
         <div className="space-y-1">
-          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-purple-800/60 border border-purple-500/30 text-[11px] font-bold tracking-wide uppercase text-purple-200">
+          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-[#002B2E] border border-[#00FE89]/30 text-[11px] font-bold tracking-wide uppercase text-[#00FE89]">
             Case Study Showcase
           </div>
           <h2 className="text-lg font-extrabold tracking-tight">
             Follow the Money: The Bakery That Takes Bets
           </h2>
-          <p className="text-xs text-purple-200/90 max-w-2xl leading-relaxed">
+          <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
             Demonstrating how AEGIS-PAY identifies subtle shifts in payment behaviour (timing, stakes, payer velocity, rapid payouts) when an onboarded retail bakery account is co-opted for illicit wagering collection.
           </p>
         </div>
         <div className="flex items-center gap-2 flex-shrink-0">
           <button
             onClick={() => onNavigate('simulation')}
-            className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-extrabold text-xs rounded-xl shadow-md transition flex items-center gap-1.5"
+            className="px-4 py-2 bg-[#00FE89] hover:bg-[#00E57B] text-[#002225] font-black text-xs rounded-xl shadow-md transition flex items-center gap-1.5"
           >
             Open Simulation Lab <ArrowUpRight size={15} />
           </button>
@@ -84,7 +84,7 @@ export const Overview: React.FC<OverviewProps> = ({ dateRangeDays, onNavigate })
         <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm hover:shadow-md transition">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Monitored Merchants</span>
-            <div className="p-2 bg-purple-50 text-purple-700 rounded-xl">
+            <div className="p-2 bg-emerald-50 text-[#008271] rounded-xl">
               <Users size={18} />
             </div>
           </div>
@@ -99,7 +99,7 @@ export const Overview: React.FC<OverviewProps> = ({ dateRangeDays, onNavigate })
         <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm hover:shadow-md transition">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Transaction Volume</span>
-            <div className="p-2 bg-indigo-50 text-indigo-700 rounded-xl">
+            <div className="p-2 bg-teal-50 text-teal-700 rounded-xl">
               <CreditCard size={18} />
             </div>
           </div>
@@ -146,19 +146,19 @@ export const Overview: React.FC<OverviewProps> = ({ dateRangeDays, onNavigate })
 
       {/* Secondary Metrics Bar */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="bg-purple-50/70 border border-purple-200 rounded-2xl p-4 flex items-center justify-between">
+        <div className="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-4 flex items-center justify-between">
           <div>
-            <div className="text-xs font-bold text-purple-900 uppercase tracking-wider">
+            <div className="text-xs font-bold text-emerald-950 uppercase tracking-wider">
               Simulated Settlement Exposure Under Review
             </div>
-            <div className="text-xl font-black text-purple-950 mt-1">
+            <div className="text-xl font-black text-[#00383D] mt-1">
               ₹{kpis.simulated_settlement_exposure_under_review.toLocaleString('en-IN')}
             </div>
-            <div className="text-[11px] text-purple-700 mt-0.5">
+            <div className="text-[11px] text-[#008271] mt-0.5">
               Cumulative 48-hour volume on Tier 4/5 accounts pending senior human approval.
             </div>
           </div>
-          <div className="p-3 bg-purple-100 rounded-2xl text-purple-800">
+          <div className="p-3 bg-emerald-100 rounded-2xl text-[#008271]">
             <ShieldAlert size={26} />
           </div>
         </div>
@@ -177,7 +177,7 @@ export const Overview: React.FC<OverviewProps> = ({ dateRangeDays, onNavigate })
           </div>
           <button
             onClick={() => onNavigate('merchants', { tier: 2 })}
-            className="text-xs font-bold text-purple-700 hover:text-purple-900 px-3 py-1.5 rounded-xl border border-purple-300 hover:bg-purple-100 transition"
+            className="text-xs font-bold text-[#008271] hover:text-[#005C51] px-3 py-1.5 rounded-xl border border-emerald-300 hover:bg-emerald-100 transition"
           >
             View Queue
           </button>
@@ -202,8 +202,8 @@ export const Overview: React.FC<OverviewProps> = ({ dateRangeDays, onNavigate })
               <AreaChart data={charts.transaction_trend}>
                 <defs>
                   <linearGradient id="volGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#7C3AED" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="#7C3AED" stopOpacity={0.0}/>
+                    <stop offset="5%" stopColor="#00C48C" stopOpacity={0.35}/>
+                    <stop offset="95%" stopColor="#00383D" stopOpacity={0.0}/>
                   </linearGradient>
                 </defs>
                 <XAxis dataKey="date" tick={{ fontSize: 11 }} tickLine={false} />
@@ -212,7 +212,7 @@ export const Overview: React.FC<OverviewProps> = ({ dateRangeDays, onNavigate })
                   formatter={(val: any) => [`₹${Number(val).toLocaleString('en-IN')}`, 'Daily Volume']}
                   contentStyle={{ borderRadius: '12px', border: '1px solid #E2E8F0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }}
                 />
-                <Area type="monotone" dataKey="volume" stroke="#7C3AED" strokeWidth={2.5} fillOpacity={1} fill="url(#volGrad)" />
+                <Area type="monotone" dataKey="volume" stroke="#00A375" strokeWidth={2.5} fillOpacity={1} fill="url(#volGrad)" />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -270,7 +270,7 @@ export const Overview: React.FC<OverviewProps> = ({ dateRangeDays, onNavigate })
             </h3>
             <button
               onClick={() => onNavigate('alerts')}
-              className="text-xs font-bold text-purple-700 hover:text-purple-900 hover:underline"
+              className="text-xs font-bold text-[#008271] hover:text-[#005C51] hover:underline"
             >
               View All Alerts &rarr;
             </button>
@@ -280,7 +280,7 @@ export const Overview: React.FC<OverviewProps> = ({ dateRangeDays, onNavigate })
               <div
                 key={a.id}
                 onClick={() => onNavigate('alerts', { selectedAlertId: a.id })}
-                className="p-3 rounded-2xl border border-slate-100 hover:border-purple-200 hover:bg-purple-50/40 transition cursor-pointer flex items-center justify-between"
+                className="p-3 rounded-2xl border border-slate-100 hover:border-emerald-200 hover:bg-emerald-50/40 transition cursor-pointer flex items-center justify-between"
               >
                 <div className="space-y-0.5">
                   <div className="flex items-center gap-2">
@@ -305,12 +305,12 @@ export const Overview: React.FC<OverviewProps> = ({ dateRangeDays, onNavigate })
         <div className="bg-white rounded-3xl border border-slate-200 p-5 shadow-sm">
           <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
             <h3 className="font-bold text-slate-900 text-sm flex items-center gap-2">
-              <FolderKanban size={16} className="text-purple-600" />
+              <FolderKanban size={16} className="text-[#008271]" />
               Active Investigation Cases
             </h3>
             <button
               onClick={() => onNavigate('cases')}
-              className="text-xs font-bold text-purple-700 hover:text-purple-900 hover:underline"
+              className="text-xs font-bold text-[#008271] hover:text-[#005C51] hover:underline"
             >
               View All Cases &rarr;
             </button>
@@ -320,7 +320,7 @@ export const Overview: React.FC<OverviewProps> = ({ dateRangeDays, onNavigate })
               <div
                 key={c.id}
                 onClick={() => onNavigate('cases', { selectedCaseId: c.id })}
-                className="p-3 rounded-2xl border border-slate-100 hover:border-purple-200 hover:bg-purple-50/40 transition cursor-pointer flex items-center justify-between"
+                className="p-3 rounded-2xl border border-slate-100 hover:border-emerald-200 hover:bg-emerald-50/40 transition cursor-pointer flex items-center justify-between"
               >
                 <div className="space-y-0.5 truncate pr-2">
                   <div className="font-bold text-sm text-slate-900 truncate">{c.title}</div>

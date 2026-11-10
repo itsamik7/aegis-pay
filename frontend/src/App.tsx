@@ -37,15 +37,18 @@ const AppContent: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center gap-4 text-white">
-        <div className="w-10 h-10 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
-        <div className="text-sm font-semibold text-slate-300">Initializing AEGIS-PAY Risk Intelligence Console...</div>
+      <div className="min-h-screen bg-[#002124] flex flex-col items-center justify-center gap-4 text-white">
+        <div className="w-10 h-10 border-4 border-[#00FE89] border-t-transparent rounded-full animate-spin"></div>
+        <div className="flex items-center gap-2">
+          <span className="text-xl font-black text-white">Pay<span className="text-[#00FE89]">U</span></span>
+          <span className="text-xs text-slate-400 font-medium">&bull; Loading Risk Console...</span>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex">
+    <div className="min-h-screen bg-[#F5F7F8] text-slate-900 flex">
       {/* Persistent Left Navigation Sidebar */}
       <Navbar
         currentTab={currentTab}

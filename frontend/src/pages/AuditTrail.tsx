@@ -40,7 +40,7 @@ export const AuditTrail: React.FC = () => {
       {/* Header */}
       <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-purple-700 text-xs font-bold uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-[#008271] text-xs font-bold uppercase tracking-wider">
             <History size={16} /> Regulatory Compliance & Accountability
           </div>
           <h2 className="text-xl font-extrabold tracking-tight text-slate-900 mt-1">
@@ -92,13 +92,13 @@ export const AuditTrail: React.FC = () => {
                 </tr>
               ) : (
                 events.map((a) => (
-                  <tr key={a.id} className="hover:bg-purple-50/30 transition">
+                  <tr key={a.id} className="hover:bg-emerald-50/30 transition">
                     <td className="py-3 px-4 font-mono text-slate-500 whitespace-nowrap">
                       {a.timestamp.replace('T', ' ').slice(0, 19)}
                     </td>
                     <td className="py-3 px-4">
                       <div className="font-bold text-slate-900">{a.actor_name}</div>
-                      <div className="text-[10px] text-purple-700 font-semibold">{a.actor_role}</div>
+                      <div className="text-[10px] text-[#008271] font-semibold">{a.actor_role}</div>
                     </td>
                     <td className="py-3 px-4 font-mono font-bold text-xs text-slate-900">
                       <span className="px-2 py-0.5 rounded bg-slate-100 border border-slate-200">
@@ -106,7 +106,7 @@ export const AuditTrail: React.FC = () => {
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <span className="font-semibold text-slate-800">{a.entity_type}</span>: <span className="font-mono text-purple-700">{a.entity_id}</span>
+                      <span className="font-semibold text-slate-800">{a.entity_type}</span>: <span className="font-mono text-[#008271]">{a.entity_id}</span>
                     </td>
                     <td className="py-3 px-4 max-w-sm text-slate-600 italic">
                       "{a.rationale || 'System logged action'}"
