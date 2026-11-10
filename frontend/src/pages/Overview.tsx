@@ -10,6 +10,7 @@ import {
 } from 'recharts';
 import { api } from '../api/client';
 import { TierBadge, StatusBadge, SeverityBadge } from '../components/Badge';
+import { useAuth } from '../context/AuthContext';
 
 interface OverviewProps {
   dateRangeDays: number;
@@ -17,6 +18,7 @@ interface OverviewProps {
 }
 
 export const Overview: React.FC<OverviewProps> = ({ dateRangeDays, onNavigate }) => {
+  const { user } = useAuth();
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -32,8 +34,10 @@ export const Overview: React.FC<OverviewProps> = ({ dateRangeDays, onNavigate })
         setLoading(false);
       }
     };
-    fetchOverview();
-  }, [dateRangeDays]);
+    if (user) {
+      fetchOverview();
+    }
+  }, [dateRangeDays, user]);
 
   if (loading || !data) {
     return (

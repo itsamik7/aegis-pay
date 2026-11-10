@@ -18,7 +18,7 @@ interface MerchantsProps {
 }
 
 export const Merchants: React.FC<MerchantsProps> = ({ initialMerchantId, onNavigate }) => {
-  const { isReadOnly } = useAuth();
+  const { user, isReadOnly } = useAuth();
   const [merchants, setMerchants] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState(0);
@@ -60,8 +60,10 @@ export const Merchants: React.FC<MerchantsProps> = ({ initialMerchantId, onNavig
   };
 
   useEffect(() => {
-    fetchMerchants();
-  }, [page, tierFilter, categoryFilter, sortBy]);
+    if (user) {
+      fetchMerchants();
+    }
+  }, [page, tierFilter, categoryFilter, sortBy, user]);
 
   // Load merchant detail
   useEffect(() => {

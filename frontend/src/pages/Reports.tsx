@@ -5,8 +5,10 @@ import {
   PieChart, Pie, Cell 
 } from 'recharts';
 import { api } from '../api/client';
+import { useAuth } from '../context/AuthContext';
 
 export const Reports: React.FC = () => {
+  const { user } = useAuth();
   const [riskDist, setRiskDist] = useState<any[]>([]);
   const [signalsDist, setSignalsDist] = useState<any[]>([]);
   const [caseOutcomes, setCaseOutcomes] = useState<any[]>([]);
@@ -30,8 +32,10 @@ export const Reports: React.FC = () => {
         setLoading(false);
       }
     };
-    fetchReports();
-  }, []);
+    if (user) {
+      fetchReports();
+    }
+  }, [user]);
 
   const handleExport = (type: string) => {
     window.location.href = `/api/reports/export/${type}`;

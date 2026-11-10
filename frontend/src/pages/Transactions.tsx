@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { api } from '../api/client';
 import { ProvenanceBadge } from '../components/Badge';
+import { useAuth } from '../context/AuthContext';
 
 interface TransactionsProps {
   initialSearch?: string;
@@ -12,6 +13,7 @@ interface TransactionsProps {
 }
 
 export const Transactions: React.FC<TransactionsProps> = ({ initialSearch, onNavigate }) => {
+  const { user } = useAuth();
   const [transactions, setTransactions] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState(0);
@@ -52,8 +54,10 @@ export const Transactions: React.FC<TransactionsProps> = ({ initialSearch, onNav
   };
 
   useEffect(() => {
-    fetchTransactions();
-  }, [page, flaggedFilter, methodFilter, sortBy]);
+    if (user) {
+      fetchTransactions();
+    }
+  }, [page, flaggedFilter, methodFilter, sortBy, user]);
 
   useEffect(() => {
     if (!selectedTxId) {

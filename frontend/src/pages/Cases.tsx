@@ -60,8 +60,10 @@ export const Cases: React.FC<CasesProps> = ({ initialCaseId, onNavigate }) => {
   };
 
   useEffect(() => {
-    fetchCases();
-  }, []);
+    if (user) {
+      fetchCases();
+    }
+  }, [user]);
 
   useEffect(() => {
     if (!selectedCaseId) return;

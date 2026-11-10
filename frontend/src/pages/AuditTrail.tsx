@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { History, Search, ShieldCheck, Filter, User } from 'lucide-react';
 import { api } from '../api/client';
+import { useAuth } from '../context/AuthContext';
 
 export const AuditTrail: React.FC = () => {
+  const { user } = useAuth();
   const [events, setEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState(0);
@@ -28,8 +30,10 @@ export const AuditTrail: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchAudit();
-  }, [page, actionFilter, entityFilter]);
+    if (user) {
+      fetchAudit();
+    }
+  }, [page, actionFilter, entityFilter, user]);
 
   return (
     <div className="space-y-6">

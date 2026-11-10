@@ -19,7 +19,7 @@ import { SettingsCompliance } from './pages/SettingsCompliance';
 import { MerchantPortal } from './pages/MerchantPortal';
 
 const AppContent: React.FC = () => {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
   const [currentTab, setCurrentTab] = useState<string>('overview');
   const [collapsed, setCollapsed] = useState<boolean>(false);
   const [dateRangeDays, setDateRangeDays] = useState<number>(30);
@@ -34,6 +34,15 @@ const AppContent: React.FC = () => {
       setNavMeta(meta);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center gap-4 text-white">
+        <div className="w-10 h-10 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+        <div className="text-sm font-semibold text-slate-300">Initializing AEGIS-PAY Risk Intelligence Console...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex">

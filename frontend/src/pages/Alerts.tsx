@@ -35,10 +35,12 @@ export const Alerts: React.FC<AlertsProps> = ({ initialAlertId, onNavigate }) =>
   const [targetAnalystId, setTargetAnalystId] = useState<number>(user?.id || 1);
   const [actionRationale, setActionRationale] = useState('');
   const [actionSubmitting, setActionSubmitting] = useState(false);
+  const [fetchError, setFetchError] = useState<string | null>(null);
 
   const fetchAlerts = async () => {
     try {
       setLoading(true);
+      setFetchError(null);
       const params: any = { page, page_size: 15 };
       if (statusFilter !== 'all') params.status = statusFilter;
       if (severityFilter !== 'all') params.severity = severityFilter;
@@ -47,16 +49,19 @@ export const Alerts: React.FC<AlertsProps> = ({ initialAlertId, onNavigate }) =>
       const res = await api.getAlerts(params);
       setAlerts(res.items);
       setTotal(res.total);
-    } catch (err) {
-      console.error(err);
+    } catch (err: any) {
+      console.error('Failed to fetch alerts:', err);
+      setFetchError(err.message || 'Failed to fetch alerts. Please ensure backend is running and you are signed in.');
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchAlerts();
-  }, [page, statusFilter, severityFilter, tierFilter]);
+    if (user) {
+      fetchAlerts();
+    }
+  }, [page, statusFilter, severityFilter, tierFilter, user]);
 
   useEffect(() => {
     if (!selectedAlertId) {
@@ -193,9 +198,37 @@ export const Alerts: React.FC<AlertsProps> = ({ initialAlertId, onNavigate }) =>
                 <tr>
                   <td colSpan={8} className="py-12 text-center text-slate-400">Loading alerts...</td>
                 </tr>
+              ) : fetchError ? (
+                <tr>
+                  <td colSpan={8} className="py-8 text-center text-rose-600">
+                    <div className="flex flex-col items-center gap-2">
+                      <AlertTriangle className="w-5 h-5 text-rose-500" />
+                      <p className="font-semibold">{fetchError}</p>
+                      <button onClick={fetchAlerts} className="px-3 py-1 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold rounded-lg text-xs">
+                        Retry Fetch
+                      </button>
+                    </div>
+                  </td>
+                </tr>
               ) : alerts.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="py-12 text-center text-slate-500">No alerts match the criteria.</td>
+                  <td colSpan={8} className="py-12 text-center text-slate-500">
+                    <div className="flex flex-col items-center gap-2">
+                      <p>No alerts match the criteria.</p>
+                      {(statusFilter !== 'all' || severityFilter !== 'all' || tierFilter !== 'all') && (
+                        <button
+                          onClick={() => {
+                            setStatusFilter('all');
+                            setSeverityFilter('all');
+                            setTierFilter('all');
+                          }}
+                          className="text-xs text-purple-600 font-semibold hover:underline"
+                        >
+                          Clear all filters
+                        </button>
+                      )}
+                    </div>
+                  </td>
                 </tr>
               ) : (
                 alerts.map((a) => (
