@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Search, Bell, Shield, ChevronDown, UserCheck, 
-  ExternalLink, Calendar, Check, AlertTriangle, Lock
+  ExternalLink, Calendar, Check, AlertTriangle, Lock, FileText
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../api/client';
@@ -258,6 +258,18 @@ export const Header: React.FC<HeaderProps> = ({
           <Shield size={14} className="text-[#008271]" />
           <span>Compliance Boundaries</span>
         </button>
+
+        {/* User Manual PDF Download */}
+        <a
+          href="/AEGIS_PAY_User_Manual_and_Feature_Guide.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-300 hover:border-[#008271] text-xs font-semibold text-slate-700 hover:text-[#008271] hover:bg-emerald-50 transition"
+          title="Download the complete operational user manual and feature guide in PDF"
+        >
+          <FileText size={14} className="text-[#008271]" />
+          <span>User Manual (PDF)</span>
+        </a>
 
         {/* Admin Portal Gateway Button */}
         <button
