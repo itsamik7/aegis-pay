@@ -35,11 +35,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const currentUser = await api.getMe();
         setUser(currentUser);
       } catch {
-        // Fallback to Risk Analyst demo user automatically
-        const defaultAnalyst = demoList.find((u: DemoUser) => u.username === 'analyst') || demoList[0];
-        if (defaultAnalyst) {
-          setAuthToken(defaultAnalyst.token);
-          setUser(defaultAnalyst);
+        // Support direct persona selection via ?as=admin / ?as=reviewer / ?as=analyst
+        const urlParams = new URLSearchParams(window.location.search);
+        const requestedRole = urlParams.get('as');
+        let targetUser = null;
+        if (requestedRole) {
+          targetUser = demoList.find((u: DemoUser) => 
+            u.username.toLowerCase() === requestedRole.toLowerCase() || 
+            u.role.toLowerCase().includes(requestedRole.toLowerCase())
+          );
+        }
+        if (!targetUser) {
+          targetUser = demoList.find((u: DemoUser) => u.username === 'analyst') || demoList[0];
+        }
+        if (targetUser) {
+          setAuthToken(targetUser.token);
+          setUser(targetUser);
         }
       }
     } catch (err) {
