@@ -22,3 +22,5 @@ frontend/.vite/
 .vscode/
 .idea/
 .env
+uploads/
+backend/uploads/

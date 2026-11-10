@@ -61,6 +61,14 @@ class Merchant(Base):
     created_at = Column(DateTime, default=utc_now)
     updated_at = Column(DateTime, default=utc_now, onupdate=utc_now)
 
+    # Ingestion & publication lifecycle
+    publication_status = Column(String(50), default="published", nullable=False, index=True) # draft, published, unpublished
+    data_source = Column(String(50), default="seed_demo", nullable=False) # manual, file_import, seed_demo
+    import_batch_id = Column(String(50), nullable=True, index=True)
+    created_by = Column(String(100), nullable=True, default="Admin")
+    published_by = Column(String(100), nullable=True, default="Admin")
+    published_at = Column(DateTime, default=utc_now)
+
     profile = relationship("MerchantProfile", back_populates="merchant", uselist=False, cascade="all, delete-orphan")
     cohort = relationship("MerchantCohort")
     transactions = relationship("Transaction", back_populates="merchant", cascade="all, delete-orphan")
@@ -111,6 +119,14 @@ class Transaction(Base):
     risk_signal_ids = Column(Text, nullable=True) # JSON array or comma separated
     risk_reason = Column(Text, nullable=True)
 
+    # Ingestion & publication lifecycle
+    publication_status = Column(String(50), default="published", nullable=False, index=True) # draft, published, unpublished
+    data_source = Column(String(50), default="seed_demo", nullable=False) # manual, file_import, seed_demo
+    import_batch_id = Column(String(50), nullable=True, index=True)
+    created_by = Column(String(100), nullable=True, default="Admin")
+    published_by = Column(String(100), nullable=True, default="Admin")
+    published_at = Column(DateTime, default=utc_now)
+
     merchant = relationship("Merchant", back_populates="transactions")
     payer = relationship("PayerToken")
 
@@ -125,6 +141,14 @@ class SettlementEvent(Base):
     payout_delay_hours = Column(Float, default=24.0)
     provider_visible_payout_ratio = Column(Float, default=1.0) # ratio of collection quickly requested out
     notes = Column(String(255), nullable=True)
+
+    # Ingestion & publication lifecycle
+    publication_status = Column(String(50), default="published", nullable=False)
+    data_source = Column(String(50), default="seed_demo", nullable=False)
+    import_batch_id = Column(String(50), nullable=True)
+    created_by = Column(String(100), nullable=True, default="Admin")
+    published_by = Column(String(100), nullable=True, default="Admin")
+    published_at = Column(DateTime, default=utc_now)
 
 class RiskSignal(Base):
     __tablename__ = "risk_signals"
@@ -330,6 +354,14 @@ class CalendarEvent(Base):
     affected_categories = Column(Text, default='["Bakeries", "Restaurants", "Confectionery"]')
     notes = Column(Text, nullable=True)
 
+    # Ingestion & publication lifecycle
+    publication_status = Column(String(50), default="published", nullable=False)
+    data_source = Column(String(50), default="seed_demo", nullable=False)
+    import_batch_id = Column(String(50), nullable=True)
+    created_by = Column(String(100), nullable=True, default="Admin")
+    published_by = Column(String(100), nullable=True, default="Admin")
+    published_at = Column(DateTime, default=utc_now)
+
 class AuditEvent(Base):
     __tablename__ = "audit_events"
 
@@ -357,3 +389,58 @@ class Notification(Base):
     link = Column(String(255), nullable=True)
     is_read = Column(Boolean, default=False)
     created_at = Column(DateTime, default=utc_now)
+
+class ImportBatch(Base):
+    __tablename__ = "import_batches"
+
+    id = Column(String(50), primary_key=True) # e.g. BATCH-2026-0001
+    dataset_type = Column(String(50), nullable=False) # merchants, transactions, settlements, calendar_events
+    source_filename = Column(String(255), nullable=False)
+    storage_key = Column(String(255), nullable=False)
+    file_size_bytes = Column(Integer, default=0)
+    mime_type = Column(String(100), default="text/csv")
+    import_mode = Column(String(50), default="strict") # strict, valid_only
+    status = Column(String(50), default="uploaded") # uploaded, parsed, validated, staged, published, rejected, rolled_back
+    total_rows = Column(Integer, default=0)
+    valid_rows = Column(Integer, default=0)
+    invalid_rows = Column(Integer, default=0)
+    staged_rows = Column(Integer, default=0)
+    published_rows = Column(Integer, default=0)
+    error_summary = Column(Text, nullable=True) # JSON array of error objects
+    created_by_id = Column(Integer, ForeignKey("users.id"), nullable=True)
+    created_by_name = Column(String(255), nullable=False, default="Admin")
+    created_at = Column(DateTime, default=utc_now)
+    published_by_id = Column(Integer, ForeignKey("users.id"), nullable=True)
+    published_by_name = Column(String(255), nullable=True)
+    published_at = Column(DateTime, nullable=True)
+    rolled_back_at = Column(DateTime, nullable=True)
+    rolled_back_by = Column(String(255), nullable=True)
+    rollback_rationale = Column(Text, nullable=True)
+
+    rows = relationship("ImportRowRecord", back_populates="batch", cascade="all, delete-orphan")
+
+class ImportRowRecord(Base):
+    __tablename__ = "import_row_records"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    batch_id = Column(String(50), ForeignKey("import_batches.id", ondelete="CASCADE"), nullable=False, index=True)
+    row_number = Column(Integer, nullable=False)
+    entity_id = Column(String(100), nullable=True)
+    status = Column(String(50), default="valid") # valid, invalid, duplicate, staged, published
+    raw_data_json = Column(Text, nullable=False)
+    errors_json = Column(Text, nullable=True) # JSON list of {field, message, expected, received}
+
+    batch = relationship("ImportBatch", back_populates="rows")
+
+class DatasetVersion(Base):
+    __tablename__ = "dataset_versions"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    version_tag = Column(String(50), unique=True, nullable=False) # e.g. DATASET-v1.0.1
+    dataset_type = Column(String(50), nullable=False)
+    batch_id = Column(String(50), nullable=True)
+    action = Column(String(50), nullable=False) # publish, rollback, manual_entry
+    records_count = Column(Integer, default=0)
+    published_by = Column(String(255), nullable=False)
+    published_at = Column(DateTime, default=utc_now)
+    notes = Column(Text, nullable=True)

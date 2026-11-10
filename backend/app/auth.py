@@ -89,6 +89,24 @@ def decode_access_token(token: str) -> Optional[dict]:
     except Exception:
         return None
 
+def get_optional_current_user(
+    credentials: Optional[HTTPAuthorizationCredentials] = Depends(security),
+    db: Session = Depends(get_db)
+) -> Optional[User]:
+    """
+    Returns the authenticated user if valid token is provided, or None for public/anonymous visitors.
+    """
+    if not credentials:
+        return None
+    token = credentials.credentials
+    payload = decode_access_token(token)
+    if not payload:
+        return None
+    user_id = payload.get("sub")
+    if not user_id:
+        return None
+    return db.query(User).filter(User.id == user_id, User.is_active == True).first()
+
 def get_current_user(
     credentials: Optional[HTTPAuthorizationCredentials] = Depends(security),
     db: Session = Depends(get_db)

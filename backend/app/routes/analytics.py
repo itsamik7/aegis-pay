@@ -4,8 +4,8 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from ..database import get_db
-from ..models import Merchant, Transaction, Alert, Case, AuditEvent, SettlementEvent
-from ..auth import get_current_user
+from ..models import Merchant, Transaction, Alert, Case, AuditEvent, SettlementEvent, User
+from ..auth import get_current_user, get_optional_current_user
 
 router = APIRouter(prefix="/analytics", tags=["Analytics & Overview"])
 
@@ -13,24 +13,30 @@ router = APIRouter(prefix="/analytics", tags=["Analytics & Overview"])
 def get_overview_kpis(
     days: int = Query(30, ge=1, le=180),
     db: Session = Depends(get_db),
-    current_user = Depends(get_current_user)
+    current_user: Optional[User] = Depends(get_optional_current_user)
 ):
     now = datetime.datetime.now(datetime.timezone.utc)
     start_date = now - datetime.timedelta(days=days)
     
-    # Total monitored merchants
-    total_merchants = db.query(Merchant).count()
+    # Total monitored published merchants
+    total_merchants = db.query(Merchant).filter(Merchant.publication_status == "published").count()
     
-    # Transactions in period
+    # Transactions in period (published only)
     tx_query = db.query(
         func.count(Transaction.id),
         func.coalesce(func.sum(Transaction.amount), 0.0)
-    ).filter(Transaction.timestamp >= start_date)
+    ).filter(
+        Transaction.timestamp >= start_date,
+        Transaction.publication_status == "published"
+    )
     
     total_tx_count, total_tx_volume = tx_query.first()
     
-    # Elevated risk merchants (Tier >= 2)
-    elevated_merchants = db.query(Merchant).filter(Merchant.current_risk_tier >= 2).count()
+    # Elevated risk merchants (Tier >= 2, published)
+    elevated_merchants = db.query(Merchant).filter(
+        Merchant.current_risk_tier >= 2,
+        Merchant.publication_status == "published"
+    ).count()
     
     # Open alerts
     open_alerts = db.query(Alert).filter(

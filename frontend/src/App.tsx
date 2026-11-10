@@ -18,8 +18,17 @@ import { AuditTrail } from './pages/AuditTrail';
 import { SettingsCompliance } from './pages/SettingsCompliance';
 import { MerchantPortal } from './pages/MerchantPortal';
 
+// Admin Portal Pages
+import { AdminLogin } from './pages/admin/AdminLogin';
+import { AdminOverview } from './pages/admin/AdminOverview';
+import { AdminDataEntry } from './pages/admin/AdminDataEntry';
+import { AdminFileImport } from './pages/admin/AdminFileImport';
+import { AdminDatasets } from './pages/admin/AdminDatasets';
+import { AdminAudit } from './pages/admin/AdminAudit';
+import { AdminGuide } from './pages/admin/AdminGuide';
+
 const AppContent: React.FC = () => {
-  const { user, isLoading } = useAuth();
+  const { user, isAdmin, isLoading } = useAuth();
   const [currentTab, setCurrentTab] = useState<string>('overview');
   const [collapsed, setCollapsed] = useState<boolean>(false);
   const [dateRangeDays, setDateRangeDays] = useState<number>(30);
@@ -121,6 +130,45 @@ const AppContent: React.FC = () => {
           {currentTab === 'compliance' && <SettingsCompliance />}
 
           {currentTab === 'merchant-portal' && <MerchantPortal />}
+
+          {/* Admin Portal Views (Protected by Server & Client Admin Gate) */}
+          {currentTab.startsWith('admin-') && !isAdmin && (
+            <AdminLogin
+              onSuccess={() => setCurrentTab('admin-overview')}
+              onCancel={() => setCurrentTab('overview')}
+            />
+          )}
+
+          {currentTab === 'admin-login' && (
+            <AdminLogin
+              onSuccess={() => setCurrentTab('admin-overview')}
+              onCancel={() => setCurrentTab('overview')}
+            />
+          )}
+
+          {currentTab === 'admin-overview' && isAdmin && (
+            <AdminOverview onNavigate={handleNavigate} />
+          )}
+
+          {currentTab === 'admin-data-entry' && isAdmin && (
+            <AdminDataEntry onNavigate={handleNavigate} />
+          )}
+
+          {currentTab === 'admin-import' && isAdmin && (
+            <AdminFileImport onNavigate={handleNavigate} />
+          )}
+
+          {currentTab === 'admin-datasets' && isAdmin && (
+            <AdminDatasets onNavigate={handleNavigate} />
+          )}
+
+          {currentTab === 'admin-audit' && isAdmin && (
+            <AdminAudit onNavigate={handleNavigate} />
+          )}
+
+          {currentTab === 'admin-guide' && isAdmin && (
+            <AdminGuide onNavigate={handleNavigate} />
+          )}
         </main>
       </div>
 

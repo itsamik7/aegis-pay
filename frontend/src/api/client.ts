@@ -229,4 +229,65 @@ export const api = {
 
   // Global Search
   search: (q: string) => request<any>(`/search?q=${encodeURIComponent(q)}`),
+
+  // Admin Portal & Data Ingestion
+  getAdminOverview: () => request<any>('/admin/overview'),
+  getAdminGuide: () => request<any>('/admin/guide'),
+  createManualEntry: (payload: { dataset_type: string; publication_mode: string; payload: any }) =>
+    request<any>('/admin/manual-entry', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+  uploadImportFile: async (dataset_type: string, file: File) => {
+    const token = getAuthToken();
+    const formData = new FormData();
+    formData.append('dataset_type', dataset_type);
+    formData.append('file', file);
+
+    const headers: Record<string, string> = {};
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    const response = await fetch(`${API_BASE}/admin/import/upload`, {
+      method: 'POST',
+      headers,
+      body: formData,
+    });
+
+    if (!response.ok) {
+      let errDetail = `Upload failed with status ${response.status}`;
+      try {
+        const errJson = await response.json();
+        if (errJson && errJson.detail) errDetail = errJson.detail;
+      } catch {}
+      throw new ApiError(response.status, errDetail);
+    }
+    return response.json();
+  },
+  validateImportBatch: (batch_id: string) =>
+    request<any>(`/admin/import/validate?batch_id=${encodeURIComponent(batch_id)}`, {
+      method: 'POST',
+    }),
+  stageImportBatch: (payload: { batch_id: string; import_mode: string }) =>
+    request<any>('/admin/import/stage', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+  publishImportBatch: (payload: { batch_id: string }) =>
+    request<any>('/admin/import/publish', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+  rollbackBatch: (batch_id: string, payload: { rationale: string }) =>
+    request<any>(`/admin/datasets/${encodeURIComponent(batch_id)}/rollback`, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+  getAdminDatasets: () => request<any>('/admin/datasets'),
+  getAdminBatchDetail: (batch_id: string) =>
+    request<any>(`/admin/datasets/${encodeURIComponent(batch_id)}`),
+  downloadTemplateUrl: (dataset_type: string) => `/api/admin/templates/${encodeURIComponent(dataset_type)}`,
+  downloadSampleUrl: (dataset_type: string) => `/api/admin/samples/${encodeURIComponent(dataset_type)}`,
+  downloadBatchErrorsUrl: (batch_id: string) => `/api/admin/datasets/${encodeURIComponent(batch_id)}/errors.csv`,
 };

@@ -225,7 +225,7 @@ def generate_synthetic_transactions(
         # 1. A few daytime normal bakery orders (cover transactions)
         for i in range(25):
             tx_time = start_time + datetime.timedelta(hours=random.randint(4, 18), minutes=random.randint(0, 59))
-            tx_id = f"TXN-{merchant_id[-4:]}-{int(tx_time.timestamp())}-day-{i}"
+            tx_id = f"TXN-{merchant_id[-4:]}-{int(tx_time.timestamp())}-day-{i}-{uuid.uuid4().hex[:4].upper()}"
             day_payer = random.choice(payer_pool[:5])
             ensure_payer(day_payer)
             created_txs.append(Transaction(

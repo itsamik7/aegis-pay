@@ -6,8 +6,8 @@ from fastapi import APIRouter, Depends, HTTPException, Query, Response
 from sqlalchemy.orm import Session
 from sqlalchemy import func, or_, desc, asc
 from ..database import get_db
-from ..models import Transaction, Merchant, Alert, Case
-from ..auth import get_current_user
+from ..models import Transaction, Merchant, Alert, Case, User
+from ..auth import get_current_user, get_optional_current_user
 
 router = APIRouter(prefix="/transactions", tags=["Transaction Explorer"])
 
@@ -26,9 +26,14 @@ def list_transactions(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
     db: Session = Depends(get_db),
-    current_user = Depends(get_current_user)
+    current_user: Optional[User] = Depends(get_optional_current_user)
 ):
     query = db.query(Transaction)
+    
+    # Public isolation: non-admins only see published transactions
+    is_admin = current_user is not None and getattr(current_user, "role", "") == "Admin"
+    if not is_admin:
+        query = query.filter(Transaction.publication_status == "published")
     
     if merchant_id:
         query = query.filter(Transaction.merchant_id == merchant_id)
@@ -147,10 +152,14 @@ def export_transactions_csv(
 def get_transaction_detail(
     tx_id: str,
     db: Session = Depends(get_db),
-    current_user = Depends(get_current_user)
+    current_user: Optional[User] = Depends(get_optional_current_user)
 ):
     tx = db.query(Transaction).filter(Transaction.id == tx_id).first()
     if not tx:
+        raise HTTPException(status_code=404, detail="Transaction not found.")
+        
+    is_admin = current_user is not None and getattr(current_user, "role", "") == "Admin"
+    if not is_admin and tx.publication_status != "published":
         raise HTTPException(status_code=404, detail="Transaction not found.")
         
     merchant = db.query(Merchant).filter(Merchant.id == tx.merchant_id).first()

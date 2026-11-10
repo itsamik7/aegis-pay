@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Search, Bell, Shield, ChevronDown, UserCheck, 
-  ExternalLink, Calendar, Check, AlertTriangle
+  ExternalLink, Calendar, Check, AlertTriangle, Lock
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../api/client';
@@ -257,6 +257,16 @@ export const Header: React.FC<HeaderProps> = ({
         >
           <Shield size={14} className="text-[#008271]" />
           <span>Compliance Boundaries</span>
+        </button>
+
+        {/* Admin Portal Gateway Button */}
+        <button
+          onClick={() => onNavigate('admin-overview')}
+          className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#002225] text-[#00FE89] border border-[#00FE89]/30 hover:bg-[#00383D] text-xs font-bold transition shadow-sm"
+          title="Open private admin portal for data ingestion and publication"
+        >
+          <Lock size={13} className="text-[#00FE89]" />
+          <span>Admin Portal</span>
         </button>
 
         {/* Notifications Dropdown */}

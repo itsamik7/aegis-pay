@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import desc, or_
 from ..database import get_db
 from ..models import Alert, Merchant, User, AuditEvent
-from ..auth import get_current_user, require_write_permission
+from ..auth import get_current_user, get_optional_current_user, require_write_permission, User
 from ..risk_engine.signals import SIGNALS_CATALOG
 from ..risk_engine.scorer import TIER_DEFINITIONS
 
@@ -39,7 +39,7 @@ def list_alerts(
     page: int = Query(1, ge=1),
     page_size: int = Query(15, ge=1, le=100),
     db: Session = Depends(get_db),
-    current_user = Depends(get_current_user)
+    current_user: Optional[User] = Depends(get_optional_current_user)
 ):
     query = db.query(Alert)
     

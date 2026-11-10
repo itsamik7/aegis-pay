@@ -22,6 +22,7 @@ from .routes.simulation import router as simulation_router
 from .routes.audit import router as audit_router
 from .routes.reports import router as reports_router
 from .routes.notifications import router as notifications_router
+from .routes.admin import router as admin_router
 
 # Ensure tables are created
 Base.metadata.create_all(bind=engine)
@@ -61,6 +62,7 @@ app.include_router(simulation_router, prefix="/api")
 app.include_router(audit_router, prefix="/api")
 app.include_router(reports_router, prefix="/api")
 app.include_router(notifications_router, prefix="/api")
+app.include_router(admin_router, prefix="/api")
 
 @app.get("/api/health")
 def health_check():

@@ -3,7 +3,7 @@ import {
   LayoutDashboard, Store, AlertOctagon, FolderKanban, 
   ArrowLeftRight, Sparkles, FlaskConical, Sliders, 
   BarChart3, History, ShieldAlert, ChevronLeft, ChevronRight,
-  StoreIcon
+  StoreIcon, Lock
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -35,6 +35,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'audit', label: 'Audit Trail', icon: History },
     { id: 'compliance', label: 'Compliance & Settings', icon: ShieldAlert },
     { id: 'merchant-portal', label: 'Merchant Demo Portal', icon: StoreIcon, merchantSpecial: true },
+    { id: 'admin-overview', label: 'Admin Portal', icon: Lock, adminSpecial: true },
   ];
 
   return (
@@ -87,6 +88,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition group relative ${
                 isActive
                   ? 'bg-[#00383D] text-[#00FE89] font-bold border-l-4 border-[#00FE89] shadow-inner'
+                  : item.adminSpecial
+                  ? 'bg-[#001719] hover:bg-[#00383D] text-[#00FE89] border border-[#00FE89]/30 mt-2 font-bold'
                   : item.merchantSpecial
                   ? 'bg-[#002B2E] hover:bg-[#00383D] text-emerald-300 border border-emerald-500/30 mt-3'
                   : 'hover:bg-[#002D31] text-slate-300 hover:text-white'

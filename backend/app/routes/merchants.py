@@ -12,7 +12,7 @@ from ..models import (
     Alert, Case, CaseNote, MerchantInformationRequest, MerchantResponse,
     EvidenceItem, AuditEvent, RiskScoreSnapshot, SettlementEvent
 )
-from ..auth import get_current_user
+from ..auth import get_current_user, get_optional_current_user, User
 from ..risk_engine.scorer import evaluate_merchant_risk, TIER_DEFINITIONS
 from ..risk_engine.baselines import get_merchant_baseline, get_cohort_baseline, get_active_calendar_context
 
@@ -30,9 +30,14 @@ def list_merchants(
     page: int = Query(1, ge=1),
     page_size: int = Query(10, ge=1, le=100),
     db: Session = Depends(get_db),
-    current_user = Depends(get_current_user)
+    current_user: Optional[User] = Depends(get_optional_current_user)
 ):
     query = db.query(Merchant)
+    
+    # Public isolation: non-admins only see published merchants
+    is_admin = current_user is not None and getattr(current_user, "role", "") == "Admin"
+    if not is_admin:
+        query = query.filter(Merchant.publication_status == "published")
     
     if search:
         s = f"%{search}%"
@@ -163,10 +168,14 @@ def export_merchants_csv(
 def get_merchant_profile_full(
     merchant_id: str,
     db: Session = Depends(get_db),
-    current_user = Depends(get_current_user)
+    current_user: Optional[User] = Depends(get_optional_current_user)
 ):
     merchant = db.query(Merchant).filter(Merchant.id == merchant_id).first()
     if not merchant:
+        raise HTTPException(status_code=404, detail="Merchant not found.")
+    
+    is_admin = current_user is not None and getattr(current_user, "role", "") == "Admin"
+    if not is_admin and merchant.publication_status != "published":
         raise HTTPException(status_code=404, detail="Merchant not found.")
         
     # Evaluate current risk live for full signal explainability
